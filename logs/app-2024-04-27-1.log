@@ -1,0 +1,5 @@
+2024-04-27 02:10:05.956 [main] INFO  com.ra.server.Server - Starting server...
+2024-04-27 02:10:19.676 [main] INFO  com.ra.server.Comands.Command - Information about commands was issued to the client
+2024-04-27 02:10:21.428 [main] INFO  com.ra.server.Comands.AllCommands.HelpCommand - Done!
+2024-04-27 02:10:28.415 [main] INFO  com.ra.server.Comands.AllCommands.ShowCommand - Collection shown
+2024-04-27 02:10:29.909 [main] INFO  com.ra.server.Comands.AllCommands.InfoCommand - Done

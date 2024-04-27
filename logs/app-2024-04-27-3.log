@@ -1,0 +1,5 @@
+2024-04-27 12:32:34.888 [main] INFO  com.ra.server.Server - Starting server...
+2024-04-27 12:32:37.383 [main] INFO  com.ra.server.Comands.AllCommands.GroupCountingByTypeCommand - Done!
+2024-04-27 12:32:56.812 [main] INFO  com.ra.server.Comands.AllCommands.AddCommand - Added ticket
+2024-04-27 12:32:59.764 [main] INFO  com.ra.server.Comands.AllCommands.SaveCommand - Saved collection
+2024-04-27 12:33:04.192 [main] INFO  com.ra.server.Comands.AllCommands.GroupCountingByTypeCommand - Done!

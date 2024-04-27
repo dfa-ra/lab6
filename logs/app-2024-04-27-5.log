@@ -1,0 +1,27 @@
+2024-04-27 12:58:36.586 [main] INFO  com.ra.server.Server - Starting server...
+2024-04-27 12:58:37.181 [main] DEBUG org.jboss.logging - Logging Provider: org.jboss.logging.Log4j2LoggerProvider
+2024-04-27 12:58:37.182 [main] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final
+2024-04-27 12:58:37.197 [main] DEBUG org.hibernate.validator.internal.xml.config.ValidationXmlParser - Trying to load META-INF/validation.xml for XML based Validator configuration.
+2024-04-27 12:58:37.200 [main] DEBUG org.hibernate.validator.internal.xml.config.ResourceLoaderHelper - Trying to load META-INF/validation.xml via TCCL
+2024-04-27 12:58:37.202 [main] DEBUG org.hibernate.validator.internal.xml.config.ResourceLoaderHelper - Trying to load META-INF/validation.xml via Hibernate Validator's class loader
+2024-04-27 12:58:37.202 [main] DEBUG org.hibernate.validator.internal.xml.config.ValidationXmlParser - No META-INF/validation.xml found. Using annotation based configuration only.
+2024-04-27 12:58:37.211 [main] DEBUG org.hibernate.validator.internal.engine.resolver.TraversableResolvers - Cannot find javax.persistence.Persistence on classpath. Assuming non JPA 2 environment. All properties will per default be traversable.
+2024-04-27 12:58:37.254 [main] DEBUG org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator - Loaded expression factory via original TCCL
+2024-04-27 12:58:37.402 [main] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryConfigurationHelper - HV000252: Using org.hibernate.validator.internal.engine.DefaultPropertyNodeNameProvider as property node name provider.
+2024-04-27 12:58:37.409 [main] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryConfigurationHelper - HV000234: Using org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator as ValidatorFactory-scoped message interpolator.
+2024-04-27 12:58:37.410 [main] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryConfigurationHelper - HV000234: Using org.hibernate.validator.internal.engine.resolver.TraverseAllTraversableResolver as ValidatorFactory-scoped traversable resolver.
+2024-04-27 12:58:37.410 [main] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryConfigurationHelper - HV000234: Using org.hibernate.validator.internal.util.ExecutableParameterNameProvider as ValidatorFactory-scoped parameter name provider.
+2024-04-27 12:58:37.411 [main] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryConfigurationHelper - HV000234: Using org.hibernate.validator.internal.engine.DefaultClockProvider as ValidatorFactory-scoped clock provider.
+2024-04-27 12:58:37.411 [main] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryConfigurationHelper - HV000234: Using org.hibernate.validator.internal.engine.scripting.DefaultScriptEvaluatorFactory as ValidatorFactory-scoped script evaluator factory.
+2024-04-27 12:58:40.071 [main] INFO  com.ra.server.Comands.AllCommands.ShowCommand - Collection shown
+2024-04-27 12:58:53.553 [main] INFO  com.ra.server.Comands.AllCommands.AddCommand - Added ticket
+2024-04-27 12:59:05.370 [main] INFO  com.ra.server.Comands.AllCommands.AddCommand - Added ticket
+2024-04-27 12:59:10.216 [main] INFO  com.ra.server.Comands.AllCommands.SaveCommand - Saved collection
+2024-04-27 12:59:13.196 [main] INFO  com.ra.server.Comands.AllCommands.ShowCommand - Collection shown
+2024-04-27 12:59:25.286 [main] INFO  com.ra.server.Comands.AllCommands.ShowCommand - Collection shown
+2024-04-27 12:59:43.185 [main] INFO  com.ra.server.Comands.AllCommands.AddCommand - Added ticket
+2024-04-27 12:59:57.889 [main] INFO  com.ra.server.Comands.AllCommands.AddCommand - Added ticket
+2024-04-27 13:00:01.607 [main] INFO  com.ra.server.Comands.AllCommands.SaveCommand - Saved collection
+2024-04-27 13:00:04.184 [main] INFO  com.ra.server.Comands.AllCommands.ShowCommand - Collection shown
+2024-04-27 13:00:11.821 [main] INFO  com.ra.server.Comands.AllCommands.HelpCommand - Done!
+2024-04-27 13:00:17.812 [main] INFO  com.ra.server.Comands.AllCommands.PrintAscendingCommand - Done
