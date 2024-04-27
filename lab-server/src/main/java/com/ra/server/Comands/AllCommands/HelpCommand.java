@@ -6,7 +6,7 @@ import com.ra.common.communication.Request;
 import com.ra.common.communication.Response;
 import com.ra.server.Comands.Command;
 import com.ra.server.Comands.Invoker;
-import com.ra.server.Comands.UpperClass;
+import com.ra.server.Comands.UpperCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,7 +16,7 @@ import java.util.Map;
  * Класс команды help(помощи)
  * @author Захарченко Роман
  */
-public class HelpCommand extends UpperClass {
+public class HelpCommand extends UpperCommand {
     private static final Logger logger = LogManager.getLogger(HelpCommand.class);
     public HelpCommand() {
         super(new CommandType(0, false), "help", "display help on available commands");

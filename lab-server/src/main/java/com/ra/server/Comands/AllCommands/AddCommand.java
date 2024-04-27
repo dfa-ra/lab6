@@ -5,7 +5,7 @@ import com.ra.common.commands.CommandType;
 import com.ra.common.communication.Request;
 import com.ra.common.communication.Response;
 import com.ra.server.Collection.CollectionManager;
-import com.ra.server.Comands.UpperClass;
+import com.ra.server.Comands.UpperCommand;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 @Setter
 @Getter
-public class AddCommand extends UpperClass {
+public class AddCommand extends UpperCommand {
 
     private static final Logger logger = LogManager.getLogger(AddCommand.class);
     CollectionManager cm = new CollectionManager();

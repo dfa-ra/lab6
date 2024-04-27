@@ -45,14 +45,13 @@ public class Invoker {
         commands.put("remove_lower", new RemoveLowerCommand());
         commands.put("print_ascending", new PrintAscendingCommand());
         commands.put("print_field_descending_type", new PrintFieldDescendingTypeCommand());
-        commands.put("print_field_type", new PrintFieldTypeCommand());
     }
 
     public Response commandSelectionByStr(Request request, boolean clientCommand) throws Exception {
         if (commands.containsKey(request.getNameCommand())){
             Command command = commands.get(request.getNameCommand());
             Response response = command.execute(request);
-            if (!clientCommand) Sender.send(new Message(messageType.DEFAULT, response.getAdditional() + "\n"));
+            if (!clientCommand) Sender.send(new Message(messageType.DEFAULT, response.toString() + "\n"));
             return response;
         }
         else {

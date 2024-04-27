@@ -4,9 +4,8 @@ import com.ra.common.sample.Ticket;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.io.Serial;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.logging.Handler;
 
 @Getter
 @ToString
@@ -14,6 +13,8 @@ public class Request implements Serializable {
     private String nameCommand = null;
     private String argumentsCommand = null;
     private Ticket ticket = null;
+    @Serial
+    private static final long serialVersionUID = -8100196035368770163L;
 
     public Request(String nameCommand, String argumentsCommand, Ticket ticket) {
         this.nameCommand = nameCommand;

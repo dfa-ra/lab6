@@ -7,7 +7,7 @@ import lombok.Getter;
 import java.io.Serializable;
 @Getter
 @AllArgsConstructor
-public abstract class UpperClass implements Serializable, Command {
+public abstract class UpperCommand implements Serializable, Command {
     private CommandType commandType;
     private String name;
     private String info;

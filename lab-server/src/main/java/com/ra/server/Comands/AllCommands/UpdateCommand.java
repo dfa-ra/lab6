@@ -5,7 +5,7 @@ import com.ra.common.commands.CommandType;
 import com.ra.common.communication.Request;
 import com.ra.common.communication.Response;
 import com.ra.server.Collection.CollectionManager;
-import com.ra.server.Comands.UpperClass;
+import com.ra.server.Comands.UpperCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,8 +13,8 @@ import org.apache.logging.log4j.Logger;
  * Класс команды изменения элемента коллекции по его id.
  * @author Захарченко Роман
  */
-public class UpdateCommand extends UpperClass {
-    private static final Logger logger = LogManager.getLogger(UpperClass.class);
+public class UpdateCommand extends UpperCommand {
+    private static final Logger logger = LogManager.getLogger(UpperCommand.class);
     CollectionManager cm = new CollectionManager();
 
     public UpdateCommand() {super(new CommandType(1, true), "update id", "update the value of a collection element whose id is equal to the given one");}

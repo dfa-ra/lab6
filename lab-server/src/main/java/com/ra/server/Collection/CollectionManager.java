@@ -73,13 +73,8 @@ public class CollectionManager{
 
         while (id != oldid) {
             oldid = id;
-            Iterator<Ticket> i = notebook.iterator();
-            while (i.hasNext()) {
-                Ticket tmp = i.next();
-                if (tmp.getId().equals(id)) {
-                    id++;
-                }
-            }
+            Long finalOldid = oldid;
+            if (notebook.stream().anyMatch(ticket1 -> ticket1.getId().equals(finalOldid))) id++;
         }
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
@@ -95,9 +90,7 @@ public class CollectionManager{
      * @param id id элемента который надо обновить.
      */
     public String update(long id, Ticket ticket){
-        Iterator<Ticket> i = notebook.iterator();
-        while (i.hasNext()) {
-            Ticket tmp = i.next();
+        for (Ticket tmp : notebook) {
             if (tmp.getId() == id){
                 notebook.remove(tmp);
                 ZonedDateTime zonedatetime = tmp.getCreationDate();
@@ -115,9 +108,7 @@ public class CollectionManager{
      * @param id id элемента который надо удалить
      */
     public String removeById(long id){
-        Iterator<Ticket> i = notebook.iterator();
-        while (i.hasNext()) {
-            Ticket tmp = i.next();
+        for (Ticket tmp : notebook) {
             if (tmp.getId() == id){
                 notebook.remove(tmp);
                 return "Complete!";
@@ -139,13 +130,11 @@ public class CollectionManager{
      * @param id заданный id.
      */
     public String removeGreater(long id){
-        Iterator<Ticket> i = notebook.iterator();
         boolean flag = false;
-        while (i.hasNext()) {
-            Ticket tmp = i.next();
+        for (Ticket tmp: notebook){
             if (tmp.getId() > id ){
                 flag = true;
-                i.remove();
+                notebook.remove(tmp);
             }
         }
         if (!flag) return "No IDs were found that matched the requirements. Try again!";
@@ -157,13 +146,11 @@ public class CollectionManager{
      * @param id заданный id.
      */
     public String removeLower(long id){
-        Iterator<Ticket> i = notebook.iterator();
         boolean flag = false;
-        while (i.hasNext()) {
-            Ticket tmp = i.next();
+        for(Ticket tmp: notebook){
             if (tmp.getId() < id ){
                 flag = true;
-                i.remove();
+                notebook.remove(tmp);
             }
         }
         if (!flag) return "No IDs were found that matched the requirements. Try again!";
@@ -187,50 +174,12 @@ public class CollectionManager{
     public Ticket[] printAscending() {
         return notebook.stream().sorted().toList().toArray(new Ticket[0]);
     }
-//
-//    /**
-//     * Метод выводит отсортированные по id элементы коллекции имеющие заданный тип.
-//     * @param type тип для которого надо вывести элементы коллекции.
-//     */
-//    public String printAllType(TicketType type){
-//        Iterator<Ticket> i = notebook.iterator();
-//        ArrayList<Long> list = new ArrayList<>();
-//        String str = "";
-//        str += type.toString() + ": ";
-//        while (i.hasNext()) {
-//            Ticket tmp = i.next();
-//            if (tmp.getType() == type ){
-//                list.add(tmp.getId());
-//            }
-//        }
-//        Comparator<? super Long> comparator =  new Comparator<Long>() {
-//            @Override
-//            public int compare(Long o1, Long o2) {
-//                return (int) (o1 - o2);
-//            }
-//        };
-//        list.sort(comparator);
-//        str += list;
-//        return str;
-//    }
-//
-//    /**
-//     * Метод выводит id всех типов билетов по группам
-//     */
-//    public String printFieldType(){
-//        String str = "";
-//        str += printAllType(TicketType.VIP) + "\n";
-//        str += printAllType(TicketType.USUAL) + "\n";
-//        str += (TicketType.BUDGETARY) + "\n";
-//        str += (TicketType.CHEAP) + "\n";
-//        return str;
-//    }
 
     /**
      * Метод выводит значения поля type всех элементов в порядке убывания
      */
     public String printFieldDescendingType(){
-        List<Ticket> list =  notebook.stream().sorted().toList();
+        List<Ticket> list = notebook.stream().sorted().toList();
         String str = "";
         for (int i = list.size()-1; i >=0 ; i--) {
             str += list.get(i).getType().toString() + "\n";

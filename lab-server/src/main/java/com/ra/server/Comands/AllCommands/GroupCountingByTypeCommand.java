@@ -5,7 +5,7 @@ import com.ra.common.commands.CommandType;
 import com.ra.common.communication.Request;
 import com.ra.common.communication.Response;
 import com.ra.server.Collection.CollectionManager;
-import com.ra.server.Comands.UpperClass;
+import com.ra.server.Comands.UpperCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
  * Класс команды сгруппировки элементов коллекции по значению поля type и вывода количества элементов в каждой группе
  * @author Захарченко Роман
  */
-public class GroupCountingByTypeCommand extends UpperClass {
+public class GroupCountingByTypeCommand extends UpperCommand {
 
     private static final Logger logger = LogManager.getLogger(GroupCountingByTypeCommand.class);
     CollectionManager cm = new CollectionManager();

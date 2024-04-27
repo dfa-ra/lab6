@@ -4,7 +4,7 @@ import com.ra.common.commands.CommandType;
 import com.ra.common.communication.Request;
 import com.ra.common.communication.Response;
 import com.ra.server.Collection.CollectionManager;
-import com.ra.server.Comands.UpperClass;
+import com.ra.server.Comands.UpperCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
  * Класс команды удаления из коллекции всех элементов, превышающие заданный по id
  * @author Захарченко Роман
  */
-public class RemoveGreaterCommand extends UpperClass {
+public class RemoveGreaterCommand extends UpperCommand {
 
     private static final Logger logger = LogManager.getLogger(RemoveGreaterCommand.class);
     CollectionManager cm = new CollectionManager();

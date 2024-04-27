@@ -4,14 +4,14 @@ import com.ra.common.commands.CommandType;
 import com.ra.common.communication.Request;
 import com.ra.common.communication.Response;
 import com.ra.server.Collection.CollectionManager;
-import com.ra.server.Comands.UpperClass;
+import com.ra.server.Comands.UpperCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
  * Класс вывода значения поля type всех элементов в порядке убывания
  */
-public class PrintFieldDescendingTypeCommand extends UpperClass {
+public class PrintFieldDescendingTypeCommand extends UpperCommand {
     private static final Logger logger = LogManager.getLogger(PrintFieldDescendingTypeCommand.class);
     CollectionManager cm = new CollectionManager();
 

@@ -18,6 +18,7 @@ import java.util.Scanner;
 public class Handler {
     private final DatagramChannel channel;
     Invoker invk = new Invoker();
+
     public Handler() throws IOException {
         channel = DatagramChannel.open();
         channel.configureBlocking(false);
@@ -26,7 +27,16 @@ public class Handler {
     }
 
     public void dataReceptionAndSend() throws Exception {
-        ByteBuffer buffer = ByteBuffer.allocate(5024);
+        //ByteBuffer buffer = ByteBuffer.allocate(16384);
+        int port;
+        try {
+            port = Integer.parseInt(System.getenv("LAB6SERVERPORT"));
+        }catch (NumberFormatException e){
+            Sender.send(new Message(messageType.ERROR, "Invalid port number"));
+            Sender.send(new Message(messageType.WARNING, "Start on 1095 port"));
+            port = 1095;
+        }
+        ByteBuffer buffer = ByteBuffer.allocate(port);
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         long startTime = System.currentTimeMillis();
         while (true) {
