@@ -81,7 +81,7 @@ public class InvokerClient {
         if (request != null){
             connectHendler.sendRequest(request);
             Response response = connectHendler.dataReception();
-            if (response != null) Sender.send(new Message(messageType.DEFAULT,response.getAdditional() + "\n"));
+            if (response != null) Sender.send(new Message(messageType.DEFAULT,response.toString() + "\n"));
             else {
                 Sender.send(new Message(messageType.ERROR,"The server went out to smoke... Try to reconnect.", "\n\n"));
                 connectHendler = new Connection().connection();

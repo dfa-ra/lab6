@@ -137,8 +137,8 @@ public class Ticket implements Comparable<Ticket>, Serializable {
     /**
      * Переопределённый компаратор. Создан для сортировки элементов коллекции по id.
      */
-    @Override
-    public int compareTo(Ticket o) {
-        return (int) (this.getId() - o.getId());
-    }
+        @Override
+        public int compareTo(Ticket o) {
+            return (int) (this.getId() - o.getId());
+        }
 }

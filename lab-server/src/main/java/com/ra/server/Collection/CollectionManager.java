@@ -55,22 +55,14 @@ public class CollectionManager{
     /**
      * Метод выводящий в стандартный поток вывода все элементы коллекции в строковом представлении
      */
-    public String show(){
+    public Ticket[] show(){
         if (notebook.isEmpty()){
-            return "Collection empty";
+            return null;
         }
         else {
-            StringBuilder str = new StringBuilder();
-            Iterator<Ticket> i = notebook.iterator();
-            while (i.hasNext()) {
-                str.append(i.next()).append("\n");
-            }
-            return str.toString();
+            return notebook.stream().sorted(Comparator.comparing(Ticket::getName)).toList().toArray(new Ticket[0]);
         }
     }
-
-
-
 
     /**
      * Метод добавляет новый элемент в коллекцию.
@@ -192,8 +184,8 @@ public class CollectionManager{
     /**
      * Метод выводит элементы коллекции в порядке возрастания.
      */
-    public String printAscending() {
-        return notebook.stream().sorted().toList().toString();
+    public Ticket[] printAscending() {
+        return notebook.stream().sorted().toList().toArray(new Ticket[0]);
     }
 //
 //    /**

@@ -1,6 +1,7 @@
 package com.ra.client;
 
 
+import com.ra.client.Utils.Config;
 import com.ra.common.ToBytes;
 import com.ra.common.communication.Request;
 import com.ra.common.communication.Response;
@@ -54,7 +55,7 @@ public class Handler {
         try {
             byte[] buffer = new byte[BUFFER_SIZE];
             DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
-            socket.setSoTimeout(10000);
+            socket.setSoTimeout(Config.getRESPONSE_TIMEOUT_VALUE());
             socket.receive(packet);
             return validResponse(packet);
         } catch (Exception e) {

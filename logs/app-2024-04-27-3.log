@@ -1,5 +1,18 @@
-2024-04-27 12:32:34.888 [main] INFO  com.ra.server.Server - Starting server...
-2024-04-27 12:32:37.383 [main] INFO  com.ra.server.Comands.AllCommands.GroupCountingByTypeCommand - Done!
-2024-04-27 12:32:56.812 [main] INFO  com.ra.server.Comands.AllCommands.AddCommand - Added ticket
-2024-04-27 12:32:59.764 [main] INFO  com.ra.server.Comands.AllCommands.SaveCommand - Saved collection
-2024-04-27 12:33:04.192 [main] INFO  com.ra.server.Comands.AllCommands.GroupCountingByTypeCommand - Done!
+2024-04-27 14:23:00.232 [main] INFO  com.ra.server.Server - Starting server...
+2024-04-27 14:23:00.835 [main] DEBUG org.jboss.logging - Logging Provider: org.jboss.logging.Log4j2LoggerProvider
+2024-04-27 14:23:00.835 [main] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final
+2024-04-27 14:23:00.843 [main] DEBUG org.hibernate.validator.internal.xml.config.ValidationXmlParser - Trying to load META-INF/validation.xml for XML based Validator configuration.
+2024-04-27 14:23:00.844 [main] DEBUG org.hibernate.validator.internal.xml.config.ResourceLoaderHelper - Trying to load META-INF/validation.xml via TCCL
+2024-04-27 14:23:00.845 [main] DEBUG org.hibernate.validator.internal.xml.config.ResourceLoaderHelper - Trying to load META-INF/validation.xml via Hibernate Validator's class loader
+2024-04-27 14:23:00.845 [main] DEBUG org.hibernate.validator.internal.xml.config.ValidationXmlParser - No META-INF/validation.xml found. Using annotation based configuration only.
+2024-04-27 14:23:00.854 [main] DEBUG org.hibernate.validator.internal.engine.resolver.TraversableResolvers - Cannot find javax.persistence.Persistence on classpath. Assuming non JPA 2 environment. All properties will per default be traversable.
+2024-04-27 14:23:00.883 [main] DEBUG org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator - Loaded expression factory via original TCCL
+2024-04-27 14:23:00.988 [main] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryConfigurationHelper - HV000252: Using org.hibernate.validator.internal.engine.DefaultPropertyNodeNameProvider as property node name provider.
+2024-04-27 14:23:00.993 [main] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryConfigurationHelper - HV000234: Using org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator as ValidatorFactory-scoped message interpolator.
+2024-04-27 14:23:00.993 [main] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryConfigurationHelper - HV000234: Using org.hibernate.validator.internal.engine.resolver.TraverseAllTraversableResolver as ValidatorFactory-scoped traversable resolver.
+2024-04-27 14:23:00.993 [main] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryConfigurationHelper - HV000234: Using org.hibernate.validator.internal.util.ExecutableParameterNameProvider as ValidatorFactory-scoped parameter name provider.
+2024-04-27 14:23:00.993 [main] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryConfigurationHelper - HV000234: Using org.hibernate.validator.internal.engine.DefaultClockProvider as ValidatorFactory-scoped clock provider.
+2024-04-27 14:23:00.994 [main] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryConfigurationHelper - HV000234: Using org.hibernate.validator.internal.engine.scripting.DefaultScriptEvaluatorFactory as ValidatorFactory-scoped script evaluator factory.
+2024-04-27 14:23:01.155 [main] INFO  com.ra.server.Comands.AllCommands.ShowCommand - Collection shown
+2024-04-27 14:23:02.626 [main] INFO  com.ra.server.Comands.AllCommands.ShowCommand - Collection shown
+2024-04-27 14:23:04.804 [main] INFO  com.ra.server.Comands.AllCommands.InfoCommand - Done

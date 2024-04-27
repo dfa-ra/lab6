@@ -24,7 +24,7 @@ public class ShowCommand extends UpperClass {
     @Override
     public Response execute(Request request) {
         logger.info("Collection shown");
-        return new Response(cm.show());
+        return new Response(cm.show(), "Done");
     }
 
 }
