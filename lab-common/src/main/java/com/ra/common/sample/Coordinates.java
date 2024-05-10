@@ -36,9 +36,9 @@ public class Coordinates implements Serializable {
             this.x = Float.parseFloat(x);
             this.y = Double.parseDouble(y);
         }catch (IllegalArgumentException e) {
-            System.out.println("There are incorrect types in the database! Check the database! This ticket was not cancelled!");
+            System.out.println("There are incorrect types in the database! Check the database! This ticket was not cancelled! (Coordinates)");
         }catch (NullPointerException e){
-            System.out.println("There are incorrect types in the database! Check the database! This ticket was not cancelled!");
+            System.out.println("There are incorrect types in the database! Check the database! This ticket was not cancelled! (Coordinates)");
         }
     }
     @Override

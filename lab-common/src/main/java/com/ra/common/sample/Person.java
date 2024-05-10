@@ -52,9 +52,9 @@ public class Person implements Serializable {
             this.hairColor = Color.valueOf(hairColor);
             this.location = location;
          }catch (IllegalArgumentException e) {
-        System.out.println("There are incorrect types in the database! Check the database! This ticket was not cancelled!");
+        System.out.println("There are incorrect types in the database! Check the database! This ticket was not cancelled! (Person)");
     }catch (NullPointerException e){
-        System.out.println("There are incorrect types in the database! Check the database! This ticket was not cancelled!");
+        System.out.println("There are incorrect types in the database! Check the database! This ticket was not cancelled! (Person)");
     }
     }
 

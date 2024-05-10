@@ -3,8 +3,8 @@ package com.ra.server;
 import com.ra.common.message.Message;
 import com.ra.common.message.Sender;
 import com.ra.common.message.messageType;
-import com.ra.server.Collection.Parser.XmlManager;
-import com.ra.server.Comands.Invoker;
+import com.ra.server.collection.parser.XmlManager;
+import com.ra.server.comands.Invoker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

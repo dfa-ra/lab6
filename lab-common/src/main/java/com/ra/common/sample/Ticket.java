@@ -98,9 +98,9 @@ public class Ticket implements Comparable<Ticket>, Serializable {
             this.type = TicketType.valueOf(type);
             this.person = person;
         }catch (IllegalArgumentException e) {
-            System.out.println("There are incorrect types in the database! Check the database! Null is placed instead of the faulty type!");
+            System.out.println("There are incorrect types in the database! Check the database! Null is placed instead of the faulty type! (Ticket)");
         }catch (NullPointerException e) {
-            System.out.println("There are incorrect types in the database! Check the database! Null is placed instead of the faulty type!");
+            System.out.println("There are incorrect types in the database! Check the database! Null is placed instead of the faulty type! (Ticket)");
         }
     }
 

@@ -48,9 +48,9 @@ public class Location implements Serializable {
             this.z = Float.parseFloat(z);
             this.name = name;
         }catch (IllegalArgumentException e) {
-            System.out.println("There are incorrect types in the database! Check the database! This ticket was not cancelled!");
+            System.out.println("There are incorrect types in the database! Check the database! This ticket was not cancelled! (Location)");
         }catch (NullPointerException e){
-            System.out.println("There are incorrect types in the database! Check the database! This ticket was not cancelled!");
+            System.out.println("There are incorrect types in the database! Check the database! This ticket was not cancelled! (Location)");
         }
     }
 

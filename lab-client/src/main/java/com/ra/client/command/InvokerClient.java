@@ -2,8 +2,8 @@ package com.ra.client.command;
 
 import com.ra.client.Connection;
 import com.ra.client.Handler;
-import com.ra.client.Utils.ParsScript;
 import com.ra.client.ValidateRequest;
+import com.ra.client.forms.Form;
 import com.ra.common.Splitter;
 import com.ra.common.communication.Request;
 import com.ra.common.communication.Response;
@@ -11,11 +11,9 @@ import com.ra.common.message.Message;
 import com.ra.common.message.Sender;
 import com.ra.common.message.messageType;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.io.*;
+import java.text.ParseException;
+import java.util.*;
 
 /**
  * Класс реализующий взаимодействие с пользователем.
@@ -51,11 +49,21 @@ public class InvokerClient {
         }
 
     }
-    public void commandScriptSelection(String fileName) throws IOException {
-        List<String> commands = ParsScript.parser(fileName);
-        for (String command : commands) {
-            creationReqest(command);
+    public void commandScriptSelection(String fileName) throws IOException, ParseException {
+        if (!new File(fileName).exists()) {
+            Sender.send(new Message(messageType.ERROR, "file does not exist"));
+            return;
         }
+        BufferedReader br = new BufferedReader(new FileReader(fileName));
+        Form.setAbilityToCorrectErrorn(false);
+        String line = br.readLine();
+        while (line != null) {
+            Sender.send(new Message(messageType.INPUT,"Input command: " + line, "\n"));
+            creationReqest(line, br);
+            line = br.readLine();
+        }
+
+        br.close();
     }
     public void commandSelection() throws Exception {
         String str;
@@ -65,19 +73,21 @@ public class InvokerClient {
             try{
                 Sender.send(new Message(messageType.INPUT,"Input command(for help write 'help'): ", ""));
                 str = in.nextLine();
-                creationReqest(str);
+                Form.setAbilityToCorrectErrorn(true);
+                creationReqest(str, new BufferedReader(new InputStreamReader(System.in)));
             } catch (NoSuchElementException e) {
                 Sender.send(new Message(messageType.ERROR,"CTRL+D entered - program terminated"));
                 clienCommands.get("exit").execute("");
             }
         }
     }
-    public void creationReqest(String str) throws IOException {
+    public void creationReqest(String str, BufferedReader reader) throws IOException, ParseException {
         List<String> tokens = Splitter.mySplit(str);
         if (clienCommands.containsKey(tokens.get(0))){
             clienCommands.get(tokens.get(0)).execute(tokens.get(1));
+            return;
         }
-        Request request = validateRequest.Validate(tokens.get(0), tokens.get(1));
+        Request request = validateRequest.Validate(tokens.get(0), tokens.get(1), reader);
         if (request != null){
             connectHendler.sendRequest(request);
             Response response = connectHendler.dataReception();

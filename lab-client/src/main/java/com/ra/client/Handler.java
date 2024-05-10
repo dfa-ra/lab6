@@ -15,7 +15,7 @@ import java.io.ObjectInputStream;
 import java.net.*;
 
 public class Handler {
-    private final int BUFFER_SIZE = 16384;
+    private final int BUFFER_SIZE = 65536;
 
     private final DatagramSocket socket;
     private final InetAddress sreverAddress;
