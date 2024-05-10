@@ -35,7 +35,7 @@ public class Form {
                 do {
                     try {
                         String tmp = bufferReader.readLine();
-                        System.out.println(tmp);
+                        if (!abilityToCorrectErrorn) System.out.println(tmp);
                         if (!checkAnswer(tmp, question, bufferReader)) {
                             answer.add(tmp);
                             if (abilityToCorrectErrorn) break;

@@ -1,11 +1,11 @@
-package com.ra.server.Comands.AllCommands;
+package com.ra.server.comands.allCommands;
 
 
 import com.ra.common.commands.CommandType;
 import com.ra.common.communication.Request;
 import com.ra.common.communication.Response;
-import com.ra.server.Collection.CollectionManager;
-import com.ra.server.Comands.UpperCommand;
+import com.ra.server.collection.CollectionManager;
+import com.ra.server.comands.UpperCommand;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
