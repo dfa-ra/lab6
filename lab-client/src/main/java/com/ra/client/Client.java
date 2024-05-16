@@ -14,5 +14,8 @@ public final class Client {
         Sender.send(new Message(messageType.INFO,"Start client"));
         InvokerClient invokerClient = new InvokerClient();
         invokerClient.commandSelection();
+
+        System.out.println("hhahahaha");
+        System.out.println("hdd");
     }
 }
