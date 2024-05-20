@@ -49,12 +49,11 @@ public class Handler {
                 DatagramPacket packet = new DatagramPacket(data, data.length);
                 channel.send(ByteBuffer.wrap(ToBytes.toBytes(validResponse(packet))), senderAddress);
             }
-            while ((System.currentTimeMillis() - startTime) < 1000 && !in.ready()) {}
             if (in.ready()) {
                 String command = in.readLine();
 
                 Sender.send(new Message(messageType.INPUT, "Server command: " + command));
-                invk.commandSelectionByStr(new Request(command, ""), false);
+                invk.commandSelectionByStr(new Request(command, "", "", ""), false);
             }
         }
     }

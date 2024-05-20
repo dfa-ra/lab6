@@ -1,4 +1,4 @@
-package com.ra.server.collection.parser;
+package com.ra.server.collection.dbManager;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -29,7 +29,8 @@ import java.util.Set;
  * Класс работы с xml файлом
  * @author Захарченко Роман
  */
-public class XmlManager {
+public class
+XmlManager {
     static ObjectMapper objectMapper = new XmlMapper();
     static SimpleModule module = new SimpleModule();
 

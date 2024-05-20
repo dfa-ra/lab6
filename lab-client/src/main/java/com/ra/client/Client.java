@@ -6,6 +6,8 @@ import com.ra.common.message.Sender;
 import com.ra.common.message.messageType;
 
 public final class Client {
+    public static String login = "Roman";
+    public static String password = "rom(ZAH)2";
     private Client() {
         throw new UnsupportedOperationException("This is an utility class and can not be instantiated");
     }
@@ -14,8 +16,5 @@ public final class Client {
         Sender.send(new Message(messageType.INFO,"Start client"));
         InvokerClient invokerClient = new InvokerClient();
         invokerClient.commandSelection();
-
-        System.out.println("hhahahaha");
-        System.out.println("hdd");
     }
 }

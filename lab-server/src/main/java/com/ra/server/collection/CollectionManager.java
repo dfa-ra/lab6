@@ -2,10 +2,13 @@ package com.ra.server.collection;
 
 import com.ra.common.enum_.TicketType;
 import com.ra.common.sample.Ticket;
-import com.ra.server.collection.parser.XmlManager;
+import com.ra.server.collection.dbManager.ConnectionBaseSQL;
+import com.ra.server.collection.dbManager.DBManager;
+import com.ra.server.collection.dbManager.XmlManager;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -60,7 +63,6 @@ public class CollectionManager{
             return null;
         }
         else {
-            System.out.println(notebook);
             return notebook.stream().sorted(Comparator.comparing(Ticket::getName)).toList().toArray(new Ticket[0]);
         }
     }
@@ -68,7 +70,7 @@ public class CollectionManager{
     /**
      * Метод добавляет новый элемент в коллекцию.
      */
-    public void add(Long id, Ticket ticket) {
+    public void add(Long id, Ticket ticket, String login, String password) throws SQLException {
         Scanner in = new Scanner(System.in);
         Long oldid = Long.valueOf(0);;
 
@@ -83,7 +85,9 @@ public class CollectionManager{
         ZonedDateTime zonedatetime = ZonedDateTime.of(date, time, zoneId);
         ticket.setCreationDate(zonedatetime);
         ticket.setId(id);
+        new DBManager(ConnectionBaseSQL.getInstance().getConnection()).addTicket(ticket, login, password);
         notebook.add(ticket);
+
     }
 
     /**

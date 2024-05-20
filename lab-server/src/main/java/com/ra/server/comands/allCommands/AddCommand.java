@@ -11,6 +11,8 @@ import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.SQLException;
+
 @Setter
 @Getter
 public class AddCommand extends UpperCommand {
@@ -23,16 +25,16 @@ public class AddCommand extends UpperCommand {
     }
 
     @Override
-    public Response execute(Request request) {
+    public Response execute(Request request) throws SQLException {
         if(request.getArgumentsCommand().isEmpty()) {
-            cm.add(1L, request.getTicket());
+            cm.add(1L, request.getTicket(), request.getLogin(), request.getPassword());
             logger.info("Added ticket");
             return new Response("Done!");
         }
         else {
             try{
                 if (Long.parseLong(request.getArgumentsCommand()) > 0) {
-                    cm.add(Long.parseLong(request.getArgumentsCommand()), request.getTicket());
+                    cm.add(Long.parseLong(request.getArgumentsCommand()), request.getTicket(), request.getLogin(), request.getPassword());
                     logger.info("Added ticket");
                     return new Response("Done!");
                 }
@@ -43,6 +45,8 @@ public class AddCommand extends UpperCommand {
             }catch (NumberFormatException nfe) {
                 logger.error(nfe.getMessage());
                 return new Response("Argument type error. Try again!");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
         }
     }

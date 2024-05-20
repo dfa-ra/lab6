@@ -3,7 +3,9 @@ package com.ra.server;
 import com.ra.common.message.Message;
 import com.ra.common.message.Sender;
 import com.ra.common.message.messageType;
-import com.ra.server.collection.parser.XmlManager;
+import com.ra.server.collection.dbManager.ConnectionBaseSQL;
+import com.ra.server.collection.dbManager.DBManager;
+import com.ra.server.collection.dbManager.XmlManager;
 import com.ra.server.comands.Invoker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,9 +23,11 @@ public final class Server {
             logger.info("Starting server...");
 
             XmlManager.myParser();
-
             Invoker invk = new Invoker();
             Handler handler = new Handler();
+
+            new DBManager(ConnectionBaseSQL.getInstance().getConnection()).dbInit();
+
             handler.dataReceptionAndSend();
         } catch (Exception e) {
             e.printStackTrace();

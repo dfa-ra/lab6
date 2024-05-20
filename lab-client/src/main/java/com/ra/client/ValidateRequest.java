@@ -56,13 +56,13 @@ public class ValidateRequest {
                     person = new Person(new SimpleDateFormat("dd.MM.yyyy").parse(answer.get(7)), Color.valueOf(answer.get(8)), new Location(answer.get(9), answer.get(10), answer.get(11), answer.get(12)));
                 }
                 return new Request(commandName, commandArg,
-                        new Ticket(Long.valueOf(0), answer.get(0), new Coordinates(answer.get(1), answer.get(2)), null, Double.parseDouble(answer.get(3)), answer.get(4), Boolean.getBoolean(answer.get(5)), TicketType.valueOf(answer.get(6)), person));
+                        new Ticket(Long.valueOf(0), answer.get(0), new Coordinates(answer.get(1), answer.get(2)), null, Double.parseDouble(answer.get(3)), answer.get(4), Boolean.getBoolean(answer.get(5)), TicketType.valueOf(answer.get(6)), person), Client.login, Client.password);
             }catch (Exception e){
                 Sender.send(new Message(messageType.ERROR, "There were technical problems due to the form not being read correctly from the file. Check your script!"));
                 return null;
             }
         }
 
-        return new Request(commandName, commandArg);
+        return new Request(commandName, commandArg, Client.login, Client.password);
     }
 }
