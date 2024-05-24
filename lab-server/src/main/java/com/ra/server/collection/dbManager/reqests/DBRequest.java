@@ -3,7 +3,7 @@ package com.ra.server.collection.dbManager.reqests;
 import lombok.Getter;
 
 @Getter
-public enum RequestDB {
+public enum DBRequest {
     ADD_USER("INSERT INTO Utilizer(login, password) VALUES(?, ?)"),
     ADD_TICKET("INSERT INTO Ticket(name, coordinates_id, creationDate," +
             " price, comment, refundable, type) VALUES(?, ?, ?, ?, ?, ?, ?)"),
@@ -45,7 +45,7 @@ public enum RequestDB {
 
     private final String request;
 
-    RequestDB(String request) {
+    DBRequest(String request) {
         this.request = request;
     }
 }

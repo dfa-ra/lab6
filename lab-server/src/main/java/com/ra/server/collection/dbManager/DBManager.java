@@ -6,7 +6,7 @@ import com.ra.common.sample.Person;
 import com.ra.common.sample.Ticket;
 import com.ra.server.collection.CollectionManager;
 import com.ra.server.collection.dbManager.reqests.CreationRequests;
-import com.ra.server.collection.dbManager.reqests.RequestDB;
+import com.ra.server.collection.dbManager.reqests.DBRequest;
 
 import java.sql.*;
 import java.text.ParseException;
@@ -29,12 +29,12 @@ public class DBManager {
 
     public String addUser(String login, String password) throws SQLException {
 
-        PreparedStatement psIsNotExits = connection.prepareStatement(RequestDB.SELECT_USER_LOGIN.getRequest());
+        PreparedStatement psIsNotExits = connection.prepareStatement(DBRequest.SELECT_USER_LOGIN.getRequest());
         psIsNotExits.setString(1, login);
         ResultSet rsIsNotExists = psIsNotExits.executeQuery();
 
         if (!rsIsNotExists.next() && !(login.equals("Aliisthebestpra") && password.equals("ctitioner"))) {
-            PreparedStatement psUser = connection.prepareStatement(RequestDB.ADD_USER.getRequest());
+            PreparedStatement psUser = connection.prepareStatement(DBRequest.ADD_USER.getRequest());
             psUser.setString(1, login);
             psUser.setString(2, password);
             psUser.execute();
@@ -44,13 +44,13 @@ public class DBManager {
     }
 
     public void addTicket(Ticket ticket, String login, String password) throws SQLException {
-        PreparedStatement psCoordinates = connection.prepareStatement(RequestDB.ADD_COORDINATES.getRequest(), Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement psCoordinates = connection.prepareStatement(DBRequest.ADD_COORDINATES.getRequest(), Statement.RETURN_GENERATED_KEYS);
 
         psCoordinates.setDouble(1, ticket.getCoordinates().getX());
         psCoordinates.setDouble(2, ticket.getCoordinates().getY());
         psCoordinates.execute();
 
-        PreparedStatement psTicket = connection.prepareStatement(RequestDB.ADD_TICKET.getRequest(), Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement psTicket = connection.prepareStatement(DBRequest.ADD_TICKET.getRequest(), Statement.RETURN_GENERATED_KEYS);
 
         psTicket.setString(1, ticket.getName());
         ResultSet rsCoordinates = psCoordinates.getGeneratedKeys();
@@ -71,7 +71,7 @@ public class DBManager {
             addPerson(rsTicket.getInt(1), ticket.getPerson());
         }
 
-        PreparedStatement psTicketToUser = connection.prepareStatement(RequestDB.ADD_USER_TO_TICKET.getRequest(), Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement psTicketToUser = connection.prepareStatement(DBRequest.ADD_USER_TO_TICKET.getRequest(), Statement.RETURN_GENERATED_KEYS);
 
         psTicketToUser.setInt(1, getUserId(login, password));
         psTicketToUser.setInt(2, rsTicket.getInt(1));
@@ -79,7 +79,7 @@ public class DBManager {
     }
 
     public void addPerson(int id, Person person) throws SQLException {
-        PreparedStatement psLocation = connection.prepareStatement(RequestDB.ADD_LOCATION.getRequest(), Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement psLocation = connection.prepareStatement(DBRequest.ADD_LOCATION.getRequest(), Statement.RETURN_GENERATED_KEYS);
 
         psLocation.setDouble(1, person.getLocation().getX());
         psLocation.setDouble(2, person.getLocation().getY());
@@ -87,7 +87,7 @@ public class DBManager {
         psLocation.setString(4, person.getLocation().getName());
         psLocation.execute();
 
-        PreparedStatement psPerson = connection.prepareStatement(RequestDB.ADD_PERSON.getRequest(), Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement psPerson = connection.prepareStatement(DBRequest.ADD_PERSON.getRequest(), Statement.RETURN_GENERATED_KEYS);
 
         psPerson.setString(1, String.valueOf(person.getBirthday()));
         psPerson.setString(2, String.valueOf(person.getHairColor()));
@@ -99,7 +99,7 @@ public class DBManager {
         psPerson.execute();
 
 
-        PreparedStatement psAddPersonTicket = connection.prepareStatement(RequestDB.ADD_PERSON_TO_TICKET.getRequest());
+        PreparedStatement psAddPersonTicket = connection.prepareStatement(DBRequest.ADD_PERSON_TO_TICKET.getRequest());
         ResultSet rsPerson = psPerson.getGeneratedKeys();
 
         psAddPersonTicket.setInt(2, id);
@@ -112,13 +112,13 @@ public class DBManager {
 
     public String updateTicket(Ticket ticket, Long id) throws SQLException {
 
-        PreparedStatement psSelectTicketInfo = connection.prepareStatement(RequestDB.SELECT_TICKET_INFO.getRequest());
+        PreparedStatement psSelectTicketInfo = connection.prepareStatement(DBRequest.SELECT_TICKET_INFO.getRequest());
         psSelectTicketInfo.setInt(1, Math.toIntExact(id));
         ResultSet rsSelectTicketInfo = psSelectTicketInfo.executeQuery();
         rsSelectTicketInfo.next();
         System.out.println(rsSelectTicketInfo.getInt(1));
 
-        PreparedStatement psTicket = connection.prepareStatement(RequestDB.UPDATE_TICKET.getRequest());
+        PreparedStatement psTicket = connection.prepareStatement(DBRequest.UPDATE_TICKET.getRequest());
 
         psTicket.setString(1, ticket.getName());
         psTicket.setDouble(2, ticket.getPrice());
@@ -128,7 +128,7 @@ public class DBManager {
         psTicket.setInt(6, Math.toIntExact(id));
         psTicket.execute();
 
-        PreparedStatement psCoordinates = connection.prepareStatement(RequestDB.UPDATE_COORDINATES.getRequest());
+        PreparedStatement psCoordinates = connection.prepareStatement(DBRequest.UPDATE_COORDINATES.getRequest());
 
         psCoordinates.setDouble(1, ticket.getCoordinates().getX());
         psCoordinates.setDouble(2, ticket.getCoordinates().getY());
@@ -136,11 +136,11 @@ public class DBManager {
         psCoordinates.execute();
 
         if (rsSelectTicketInfo.getObject(3) != null) {
-            PreparedStatement psUpdatePersonID = connection.prepareStatement(RequestDB.UPDATE_SET_NULL_PERSON_ID.getRequest());
+            PreparedStatement psUpdatePersonID = connection.prepareStatement(DBRequest.UPDATE_SET_NULL_PERSON_ID.getRequest());
             psUpdatePersonID.setInt(1, Math.toIntExact(id));
             psUpdatePersonID.execute();
 
-            PreparedStatement psSelectPersonInfo = connection.prepareStatement(RequestDB.SELECT_PERSON_INFO.getRequest());
+            PreparedStatement psSelectPersonInfo = connection.prepareStatement(DBRequest.SELECT_PERSON_INFO.getRequest());
             psSelectPersonInfo.setInt(1, rsSelectTicketInfo.getInt(3));
             ResultSet rsSelectPersonInfo = psSelectPersonInfo.executeQuery();
             rsSelectPersonInfo.next();
@@ -156,12 +156,12 @@ public class DBManager {
     }
 
     public String checkExistsUser(String login, String password) throws SQLException {
-        PreparedStatement psSelectUserLogin = connection.prepareStatement(RequestDB.SELECT_USER_LOGIN.getRequest());
+        PreparedStatement psSelectUserLogin = connection.prepareStatement(DBRequest.SELECT_USER_LOGIN.getRequest());
         psSelectUserLogin.setString(1, login);
         ResultSet rsSelectUserLogin = psSelectUserLogin.executeQuery();
         if (!rsSelectUserLogin.next()) return "Not Exists";
 
-        PreparedStatement psSelectUser = connection.prepareStatement(RequestDB.SELECT_USER.getRequest());
+        PreparedStatement psSelectUser = connection.prepareStatement(DBRequest.SELECT_USER.getRequest());
         psSelectUser.setString(1, login);
         psSelectUser.setString(2, password);
         ResultSet rsSelectUser = psSelectUser.executeQuery();
@@ -174,7 +174,7 @@ public class DBManager {
 
         if (login.equals("Aliisthebestpra") && password.equals("ctitioner")) return "ok";
 
-        PreparedStatement psSelectTicketInfo = connection.prepareStatement(RequestDB.SELECT_TICKET_INFO.getRequest());
+        PreparedStatement psSelectTicketInfo = connection.prepareStatement(DBRequest.SELECT_TICKET_INFO.getRequest());
         psSelectTicketInfo.setInt(1, Math.toIntExact(id));
         ResultSet rsSelectTicketInfo = psSelectTicketInfo.executeQuery();
 
@@ -192,7 +192,7 @@ public class DBManager {
     }
 
     public int getUserId(String login, String password) throws SQLException {
-        PreparedStatement psSelectUserID = connection.prepareStatement(RequestDB.SELECT_USER.getRequest());
+        PreparedStatement psSelectUserID = connection.prepareStatement(DBRequest.SELECT_USER.getRequest());
 
         psSelectUserID.setString(1, login);
         psSelectUserID.setString(2, password);
@@ -207,7 +207,7 @@ public class DBManager {
     public void getCollection() throws SQLException, ParseException {
         HashSet<Ticket> notebook = new HashSet<>();
 
-        PreparedStatement psSelectAllInOneTable = connection.prepareStatement(RequestDB.SELECT_ALL_IN_ONE_TABLE.getRequest());
+        PreparedStatement psSelectAllInOneTable = connection.prepareStatement(DBRequest.SELECT_ALL_IN_ONE_TABLE.getRequest());
         ResultSet rsSelectAllInOneTable = psSelectAllInOneTable.executeQuery();
         while (rsSelectAllInOneTable.next()){
             Person person = null;
@@ -243,25 +243,25 @@ public class DBManager {
     }
 
     public void deleteLocationById(int id) throws SQLException {
-        PreparedStatement psDeleteLocation = connection.prepareStatement(RequestDB.DELETE_LOCATION.getRequest());
+        PreparedStatement psDeleteLocation = connection.prepareStatement(DBRequest.DELETE_LOCATION.getRequest());
         psDeleteLocation.setInt(1, id);
         psDeleteLocation.execute();
     }
 
     public void deletePersonById(int id) throws SQLException {
-        PreparedStatement psDeletePerson = connection.prepareStatement(RequestDB.DELETE_PERSON.getRequest());
+        PreparedStatement psDeletePerson = connection.prepareStatement(DBRequest.DELETE_PERSON.getRequest());
         psDeletePerson.setObject(1, id);
         psDeletePerson.execute();
     }
 
     public void deleteCoordinatesById(int id) throws SQLException {
-        PreparedStatement psDeleteCoordinates = connection.prepareStatement(RequestDB.DELETE_COORDINATES.getRequest());
+        PreparedStatement psDeleteCoordinates = connection.prepareStatement(DBRequest.DELETE_COORDINATES.getRequest());
         psDeleteCoordinates.setObject(1, id);
         psDeleteCoordinates.execute();
     }
 
     public void deleteTicketById(int id) throws SQLException {
-        PreparedStatement psDeletePerson = connection.prepareStatement(RequestDB.DELETE_TICKET.getRequest());
+        PreparedStatement psDeletePerson = connection.prepareStatement(DBRequest.DELETE_TICKET.getRequest());
         psDeletePerson.setObject(1, id);
         psDeletePerson.execute();
     }
@@ -270,12 +270,12 @@ public class DBManager {
 
         if (!checkTicketUser(Math.toIntExact(id), login, password).equals("ok")) return false;
 
-        PreparedStatement psSelectTicketInfo = connection.prepareStatement(RequestDB.SELECT_TICKET_INFO.getRequest());
+        PreparedStatement psSelectTicketInfo = connection.prepareStatement(DBRequest.SELECT_TICKET_INFO.getRequest());
         psSelectTicketInfo.setInt(1, Math.toIntExact(id));
         ResultSet rsSelectTicketInfo = psSelectTicketInfo.executeQuery();
         rsSelectTicketInfo.next();
 
-        PreparedStatement psSelectPersonInfo = connection.prepareStatement(RequestDB.SELECT_PERSON_INFO.getRequest());
+        PreparedStatement psSelectPersonInfo = connection.prepareStatement(DBRequest.SELECT_PERSON_INFO.getRequest());
         psSelectPersonInfo.setInt(1, rsSelectTicketInfo.getInt(3));
         ResultSet rsSelectPersonInfo = psSelectPersonInfo.executeQuery();
         rsSelectPersonInfo.next();
@@ -288,7 +288,7 @@ public class DBManager {
     }
 
     public long getTicketID() throws SQLException {
-        PreparedStatement ps = connection.prepareStatement(RequestDB.SELECT_SEQUENCE_TICKET_ID.getRequest());
+        PreparedStatement ps = connection.prepareStatement(DBRequest.SELECT_SEQUENCE_TICKET_ID.getRequest());
         ResultSet rs = ps.executeQuery();
         rs.next();
         return rs.getInt(1);
