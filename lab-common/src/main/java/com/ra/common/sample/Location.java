@@ -37,11 +37,10 @@ public class Location implements Serializable {
      * Название локации, может быть null.
      */
     private String name; //Поле может быть null
-    @JsonCreator
-    public Location(@JacksonXmlProperty(localName = "x") String x,
-                    @JacksonXmlProperty(localName = "y") String y,
-                    @JacksonXmlProperty(localName = "z") String z,
-                    @JacksonXmlProperty(localName = "name") String name) {
+    public Location(String x,
+                    String y,
+                    String z,
+                    String name) {
         try{
             this.x = Double.parseDouble(x);
             this.y = Long.parseLong(y);

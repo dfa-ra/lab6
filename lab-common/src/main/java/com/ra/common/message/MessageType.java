@@ -3,7 +3,7 @@ package com.ra.common.message;
 import lombok.Getter;
 
 @Getter
-public enum messageType {
+public enum MessageType {
     DEFAULT("\003[0m"),
     INFO("\033[0;32m"),
     ERROR("\033[0;31m"),
@@ -12,7 +12,7 @@ public enum messageType {
 
     private final String color;
 
-    messageType(String color) {
+    MessageType(String color) {
         this.color = color;
     }
 }

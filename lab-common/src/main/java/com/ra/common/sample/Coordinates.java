@@ -29,9 +29,8 @@ public class Coordinates implements Serializable {
      */
     @NotNull(message = "Error! Coordinates y can't be null!")
     private double y; //Поле не может быть null
-    @JsonCreator
-    public Coordinates (@JacksonXmlProperty(localName = "x") String x,
-                        @JacksonXmlProperty(localName = "y") String y){
+    public Coordinates (String x,
+                        String y){
         try{
             this.x = Float.parseFloat(x);
             this.y = Double.parseDouble(y);

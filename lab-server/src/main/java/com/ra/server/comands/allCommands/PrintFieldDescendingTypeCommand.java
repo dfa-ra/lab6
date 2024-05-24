@@ -15,7 +15,7 @@ public class PrintFieldDescendingTypeCommand extends UpperCommand {
     private static final Logger logger = LogManager.getLogger(PrintFieldDescendingTypeCommand.class);
     CollectionManager cm = new CollectionManager();
 
-    public PrintFieldDescendingTypeCommand() {super(new CommandType(0, false), "print_field_descending_type", "print the type field values of all elements in descending order");}
+    public PrintFieldDescendingTypeCommand() {super(new CommandType(0, false, false), "print_field_descending_type", "print the type field values of all elements in descending order");}
 
     @Override
     public Response execute(Request request) throws Exception {

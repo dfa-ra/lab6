@@ -17,13 +17,13 @@ public class RemoveGreaterCommand extends UpperCommand {
     private static final Logger logger = LogManager.getLogger(RemoveGreaterCommand.class);
     CollectionManager cm = new CollectionManager();
 
-    public RemoveGreaterCommand() {super(new CommandType(1, false), "remove_greater", "remove from the collection all elements greater than the given one");}
+    public RemoveGreaterCommand() {super(new CommandType(1, false, false), "remove_greater", "remove from the collection all elements greater than the given one");}
 
     @Override
     public Response execute(Request request) {
         try{
             if (Long.parseLong(request.getArgumentsCommand()) > 0) {
-                String str = cm.removeGreater(Long.parseLong(request.getArgumentsCommand()));
+                String str = cm.removeGreater(Long.parseLong(request.getArgumentsCommand()), request.getLogin(), request.getPassword());
                 logger.info("Remove element greater id = " + request.getArgumentsCommand());
                 return new Response(str);
             }

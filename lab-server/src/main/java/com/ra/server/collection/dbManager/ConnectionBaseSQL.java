@@ -2,7 +2,7 @@ package com.ra.server.collection.dbManager;
 
 import com.ra.common.message.Message;
 import com.ra.common.message.Sender;
-import com.ra.common.message.messageType;
+import com.ra.common.message.MessageType;
 import lombok.Getter;
 
 import java.sql.Connection;
@@ -20,7 +20,7 @@ public class ConnectionBaseSQL {
 
     private ConnectionBaseSQL() throws SQLException {
         this.connection = DriverManager.getConnection(URL, USER, PASSWORD);
-        Sender.send(new Message(messageType.INFO, "psql connect", "\n"));
+        Sender.send(new Message(MessageType.INFO, "psql connect", "\n"));
     }
 
     public static ConnectionBaseSQL getInstance() throws SQLException {

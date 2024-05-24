@@ -5,8 +5,11 @@ import com.ra.common.communication.Request;
 import com.ra.common.communication.Response;
 import com.ra.common.message.Message;
 import com.ra.common.message.Sender;
-import com.ra.common.message.messageType;
+import com.ra.common.message.MessageType;
 import com.ra.server.comands.allCommands.*;
+import com.ra.server.comands.allCommands.dbCommand.AddNewUserCommand;
+import com.ra.server.comands.allCommands.dbCommand.CheckExistsUserCommand;
+import com.ra.server.comands.allCommands.dbCommand.CheckTicketUserCommand;
 import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,7 +40,6 @@ public class Invoker {
         commands.put("show", new ShowCommand());
         commands.put("add", new AddCommand());
         commands.put("clear", new ClearCommand());
-        commands.put("save", new SaveCommand());
         commands.put("remove_by_id", new RemoveByIdCommand());
         commands.put("update", new UpdateCommand());
         commands.put("group_counting_by_type", new GroupCountingByTypeCommand());
@@ -45,17 +47,20 @@ public class Invoker {
         commands.put("remove_lower", new RemoveLowerCommand());
         commands.put("print_ascending", new PrintAscendingCommand());
         commands.put("print_field_descending_type", new PrintFieldDescendingTypeCommand());
+        commands.put("sign_up", new AddNewUserCommand());
+        commands.put("sign_in", new CheckExistsUserCommand());
+        commands.put("check_permission_update", new CheckTicketUserCommand());
     }
 
     public Response commandSelectionByStr(Request request, boolean clientCommand) throws Exception {
         if (commands.containsKey(request.getNameCommand())){
             Command command = commands.get(request.getNameCommand());
             Response response = command.execute(request);
-            if (!clientCommand) Sender.send(new Message(messageType.DEFAULT, response.toString() + "\n"));
+            if (!clientCommand) Sender.send(new Message(MessageType.DEFAULT, response.toString() + "\n"));
             return response;
         }
         else {
-            Sender.send(new Message(messageType.WARNING, "Command not found"));
+            Sender.send(new Message(MessageType.WARNING, "Command not found"));
             return new Response("This command does not exist. Using the 'help' command you can see all available commands.");
         }
     }
@@ -66,7 +71,7 @@ public class Invoker {
             if (entry.getValue().getCommandType().getArgumentCount_max() != -1)
                 allCommand.put(entry.getKey(), entry.getValue().getCommandType());
         }
-        Sender.send(new Message(messageType.DEFAULT, "All resolved commands are issued to the client \n"));
+        Sender.send(new Message(MessageType.DEFAULT, "All resolved commands are issued to the client \n"));
         logger.info("Information about commands was issued to the client");
         return allCommand;
     }

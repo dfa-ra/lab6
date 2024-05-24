@@ -2,14 +2,16 @@ package com.ra.client.command;
 
 import com.ra.client.Connection;
 import com.ra.client.Handler;
+import com.ra.client.LogIn;
+import com.ra.common.User;
 import com.ra.client.ValidateRequest;
-import com.ra.client.forms.Form;
 import com.ra.common.Splitter;
 import com.ra.common.communication.Request;
 import com.ra.common.communication.Response;
+import com.ra.common.forms.Form;
 import com.ra.common.message.Message;
 import com.ra.common.message.Sender;
-import com.ra.common.message.messageType;
+import com.ra.common.message.MessageType;
 
 import java.io.*;
 import java.text.ParseException;
@@ -22,16 +24,33 @@ import java.util.*;
 public class InvokerClient {
     private final Scanner in = new Scanner(System.in);
     protected String[] tokens;
-
+    private User user = new User();
     private Handler connectHendler;
 
     private ValidateRequest validateRequest;
     private final HashMap<String, Command> clienCommands = new HashMap<>();
-    public InvokerClient() throws IOException {
+    public InvokerClient() throws IOException, ParseException {
+        clienCommands.put("sign_out", (a) -> logIn());
         clienCommands.put("exit", (a) -> System.exit(0));
         clienCommands.put("execute_script", this::commandScriptSelection);
         connectHendler = new Connection().connection();
+
+        logIn();
         getAllCommands();
+    }
+
+    public void logIn() throws ParseException {
+        while (true){
+            Sender.send(new Message(MessageType.INPUT,"sign_in or sign_up: ", ""));
+            String str = in.nextLine();
+            if (str.equals("sign_in")) {
+                if (LogIn.initUser(connectHendler, user))
+                    break;
+            } else if (str.equals("sign_up")) {
+                if (LogIn.addUser(connectHendler, user))
+                    break;
+            }
+        }
     }
 
     public void getAllCommands() throws IOException {
@@ -40,9 +59,9 @@ public class InvokerClient {
         Response response = connectHendler.dataReception();
         if (response != null) {
             validateRequest = new ValidateRequest(response.getInfoCommand());
-            Sender.send(new Message(messageType.INFO,"All commands have been received. The application is ready to work"));
+            Sender.send(new Message(MessageType.INFO,"All commands have been received. The application is ready to work"));
         }else {
-            Sender.send(new Message(messageType.ERROR,"The server went out to smoke...\n" +
+            Sender.send(new Message(MessageType.ERROR,"The server went out to smoke...\n" +
                     "(check that the port and host are correct)"));
             connectHendler = new Connection().connection();
             getAllCommands();
@@ -51,14 +70,14 @@ public class InvokerClient {
     }
     public void commandScriptSelection(String fileName) throws IOException, ParseException {
         if (!new File(fileName).exists()) {
-            Sender.send(new Message(messageType.ERROR, "file does not exist"));
+            Sender.send(new Message(MessageType.ERROR, "file does not exist"));
             return;
         }
         BufferedReader br = new BufferedReader(new FileReader(fileName));
-        Form.setAbilityToCorrectErrorn(false);
+        Form.setAbilityToCorrectError(false);
         String line = br.readLine();
         while (line != null) {
-            Sender.send(new Message(messageType.INPUT,"Input command: " + line, "\n"));
+            Sender.send(new Message(MessageType.INPUT,"Input command: " + line, "\n"));
             creationReqest(line, br);
             line = br.readLine();
         }
@@ -71,12 +90,13 @@ public class InvokerClient {
         Scanner in = new Scanner(System.in);
         while (true) {
             try{
-                Sender.send(new Message(messageType.INPUT,"Input command(for help write 'help'): ", ""));
+                Sender.send(new Message(MessageType.INPUT,"Input command(for help write 'help'): ", ""));
                 str = in.nextLine();
-                Form.setAbilityToCorrectErrorn(true);
+                Form.setAbilityToCorrectError(true);
                 creationReqest(str, new BufferedReader(new InputStreamReader(System.in)));
             } catch (NoSuchElementException e) {
-                Sender.send(new Message(messageType.ERROR,"CTRL+D entered - program terminated"));
+                Sender.send(new Message(MessageType.ERROR,"CTRL+D entered - program terminated"));
+                Form.setAbilityToCorrectError(false);
                 clienCommands.get("exit").execute("");
             }
         }
@@ -87,17 +107,34 @@ public class InvokerClient {
             clienCommands.get(tokens.get(0)).execute(tokens.get(1));
             return;
         }
+        if (!checkPermission(tokens)) return;
+
         Request request = validateRequest.Validate(tokens.get(0), tokens.get(1), reader);
         if (request != null){
+            request.setUser(user);
             connectHendler.sendRequest(request);
             Response response = connectHendler.dataReception();
-            if (response != null) Sender.send(new Message(messageType.DEFAULT,response.toString() + "\n"));
+            if (response != null) Sender.send(new Message(MessageType.DEFAULT,response.toString() + "\n"));
             else {
-                Sender.send(new Message(messageType.ERROR,"The server went out to smoke... Try to reconnect.", "\n\n"));
+                Sender.send(new Message(MessageType.ERROR,"The server went out to smoke... Try to reconnect.", "\n\n"));
                 connectHendler = new Connection().connection();
                 getAllCommands();
             }
         }
-        else Sender.send(new Message(messageType.WARNING,"invalid command"));
+        else Sender.send(new Message(MessageType.WARNING,"invalid command"));
+    }
+
+    public boolean checkPermission(List<String> tokens){
+        if (!validateRequest.getCommandType().containsKey(tokens.get(0)))
+            return true;
+        if (validateRequest.getCommandType().get(tokens.get(0)).isPermissionUpdate()){
+            Request request = new Request("check_permission_update", tokens.get(1));
+            request.setUser(user);
+            connectHendler.sendRequest(request);
+            Response response = connectHendler.dataReception();
+            if (response.getAdditional().equals("ok")) return false;
+            Sender.send(new Message(MessageType.WARNING, response.getAdditional(), "\n"));
+        }
+        return true;
     }
 }

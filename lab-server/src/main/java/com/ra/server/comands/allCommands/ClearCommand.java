@@ -18,12 +18,12 @@ public class ClearCommand extends UpperCommand {
     private static final Logger logger = LogManager.getLogger(ClearCommand.class);
 
     public ClearCommand() {
-        super(new CommandType(0, false), "clear", "clear the collection");
+        super(new CommandType(-1, false, false), "clear", "clear the collection");
     }
 
     @Override
     public Response execute(Request request) {
-        cm.clear();
+        cm.clear(request.getLogin(), request.getPassword());
         logger.info("Collection cleared");
         return new Response("Done!");
     }

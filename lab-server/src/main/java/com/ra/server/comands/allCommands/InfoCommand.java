@@ -17,7 +17,7 @@ public class InfoCommand extends UpperCommand {
     CollectionManager cm = new CollectionManager();
 
     public InfoCommand() {
-        super(new CommandType(0, false), "info", "print information about the collection (type, initialization date, number of elements, etc.) to standard output");
+        super(new CommandType(0, false, false), "info", "print information about the collection (type, initialization date, number of elements, etc.) to standard output");
     }
 
     @Override

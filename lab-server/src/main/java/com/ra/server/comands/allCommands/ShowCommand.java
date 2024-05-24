@@ -18,7 +18,7 @@ public class ShowCommand extends UpperCommand {
     CollectionManager cm = new CollectionManager();
 
     public ShowCommand() {
-        super(new CommandType(0, false), "show", "Print to standard output all the elements of the collection in string representation");
+        super(new CommandType(0, false, false), "show", "Print to standard output all the elements of the collection in string representation");
     }
 
     @Override

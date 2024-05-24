@@ -4,6 +4,14 @@ import lombok.Getter;
 
 @Getter
 public enum CreationRequests {
+    CREATE_TICKET_SEQUENCE("CREATE SEQUENCE IF NOT EXISTS id"),
+
+    CREATE_USER("CREATE TABLE IF NOT EXISTS Utilizer(" +
+            "id BIGSERIAL PRIMARY KEY," +
+            "login TEXT NOT NULL," +
+            "password TEXT NOT NULL" +
+            ")"),
+
     CREATE_LOCATION("CREATE TABLE IF NOT EXISTS Location(" +
             "id BIGSERIAL PRIMARY KEY," +
             "x DOUBLE PRECISION," +
@@ -26,7 +34,7 @@ public enum CreationRequests {
             ")"),
 
     CREATE_TICKET("CREATE TABLE IF NOT EXISTS Ticket(" +
-            "id BIGSERIAL PRIMARY KEY," +
+            "id BIGINT PRIMARY KEY DEFAULT (nextval('id'))," +
             "name TEXT NOT NULL," +
             "coordinates_id INTEGER REFERENCES Coordinates(id)," +
             "creationDate TEXT NOT NULL," +
@@ -34,20 +42,10 @@ public enum CreationRequests {
             "comment TEXT," +
             "refundable BOOLEAN," +
             "type TEXT NOT NULL," +
-            "person_id INTEGER NULL REFERENCES Person(id)" +
-            ")"),
-
-    CREATE_USER("CREATE TABLE IF NOT EXISTS Utilizer(" +
-            "id BIGSERIAL PRIMARY KEY," +
-            "login TEXT NOT NULL," +
-            "password TEXT NOT NULL" +
-            ")"),
-
-    CREATE_USER_TICKET("CREATE TABLE IF NOT EXISTS Utilizer_Ticket(" +
-            "utilizer_id INTEGER REFERENCES Utilizer(id) NOT NULL," +
-            "ticket_id  INTEGER REFERENCES Ticket(id) NOT NULL," +
-            "PRIMARY KEY (utilizer_id, ticket_id)" +
+            "person_id INTEGER NULL REFERENCES Person(id)," +
+            "Utilizer_id INTEGER NULL REFERENCES Utilizer(id)" +
             ")");
+
 
 
 

@@ -2,10 +2,9 @@ package com.ra.server;
 
 import com.ra.common.message.Message;
 import com.ra.common.message.Sender;
-import com.ra.common.message.messageType;
+import com.ra.common.message.MessageType;
 import com.ra.server.collection.dbManager.ConnectionBaseSQL;
 import com.ra.server.collection.dbManager.DBManager;
-import com.ra.server.collection.dbManager.XmlManager;
 import com.ra.server.comands.Invoker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,14 +18,14 @@ public final class Server {
 
     public static void main(String[] args) {
         try {
-            Sender.send(new Message(messageType.INFO, "Server started"));
+            Sender.send(new Message(MessageType.INFO, "Server started"));
             logger.info("Starting server...");
+            new DBManager(ConnectionBaseSQL.getInstance().getConnection()).dbInit();
+            new DBManager(ConnectionBaseSQL.getInstance().getConnection()).getCollection();
+            new Invoker();
 
-            XmlManager.myParser();
-            Invoker invk = new Invoker();
             Handler handler = new Handler();
 
-            new DBManager(ConnectionBaseSQL.getInstance().getConnection()).dbInit();
 
             handler.dataReceptionAndSend();
         } catch (Exception e) {

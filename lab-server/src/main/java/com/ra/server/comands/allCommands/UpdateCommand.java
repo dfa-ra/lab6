@@ -4,10 +4,17 @@ package com.ra.server.comands.allCommands;
 import com.ra.common.commands.CommandType;
 import com.ra.common.communication.Request;
 import com.ra.common.communication.Response;
+import com.ra.common.forms.Form;
+import com.ra.common.forms.HelpForm;
+import com.ra.common.forms.typeForms.PersonForm;
+import com.ra.common.forms.typeForms.TicketForm;
 import com.ra.server.collection.CollectionManager;
 import com.ra.server.comands.UpperCommand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Класс команды изменения элемента коллекции по его id.
@@ -16,8 +23,14 @@ import org.apache.logging.log4j.Logger;
 public class UpdateCommand extends UpperCommand {
     private static final Logger logger = LogManager.getLogger(UpperCommand.class);
     CollectionManager cm = new CollectionManager();
+    static private Form form = new Form(new TicketForm());
 
-    public UpdateCommand() {super(new CommandType(1, true), "update id", "update the value of a collection element whose id is equal to the given one");}
+    static {
+        form.setHelpForm(new PersonForm());
+    }
+
+    public UpdateCommand() {
+        super(new CommandType(1, true,  new TicketForm(), new PersonForm(), true), "update id", "update the value of a collection element whose id is equal to the given one");}
 
     @Override
     public Response execute(Request request) {
@@ -34,6 +47,8 @@ public class UpdateCommand extends UpperCommand {
         }catch (NumberFormatException e) {
             logger.error(e.getMessage());
             return new Response("Argument error. Try again!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

@@ -19,7 +19,7 @@ public class GroupCountingByTypeCommand extends UpperCommand {
     CollectionManager cm = new CollectionManager();
 
     public GroupCountingByTypeCommand() {
-        super(new CommandType(0, false), "group_counting_by_type", "group the collection elements by the value of the type field, display the number of elements in each group");
+        super(new CommandType(0, false, false), "group_counting_by_type", "group the collection elements by the value of the type field, display the number of elements in each group");
     }
 
     @Override

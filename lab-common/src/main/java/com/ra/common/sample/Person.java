@@ -30,7 +30,6 @@ public class Person implements Serializable {
      * День рождения персонажа, не может быть null
      */
     @NotNull(message = "Error!! Birthday can't be null!")
-    @JsonSerialize(using = CustomSerializer.class)
     private Date birthday; //Поле не может быть null
     /**
      * Цвет волос персонажа, может быть null
@@ -41,12 +40,11 @@ public class Person implements Serializable {
      */
     @Valid
     @NotNull(message = "Error!! Location can't be null!")
-    @JacksonXmlElementWrapper(localName = "location", useWrapping = false)
     private Location location; //Поле не может быть null
-    @JsonCreator
-    public Person(@JacksonXmlProperty(localName = "birthday") String birthday,
-                  @JacksonXmlProperty(localName = "hairColor") String hairColor,
-                  @JacksonXmlProperty(localName = "location") Location location) throws ParseException {
+
+    public Person(String birthday,
+                  String hairColor,
+                  Location location) throws ParseException {
         try {
             this.birthday = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy", Locale.ENGLISH).parse(birthday);
             this.hairColor = Color.valueOf(hairColor);

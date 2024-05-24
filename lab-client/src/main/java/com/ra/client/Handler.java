@@ -7,7 +7,7 @@ import com.ra.common.communication.Request;
 import com.ra.common.communication.Response;
 import com.ra.common.message.Message;
 import com.ra.common.message.Sender;
-import com.ra.common.message.messageType;
+import com.ra.common.message.MessageType;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -15,7 +15,6 @@ import java.io.ObjectInputStream;
 import java.net.*;
 
 public class Handler {
-    private final int BUFFER_SIZE = 65536;
 
     private final DatagramSocket socket;
     private final InetAddress sreverAddress;
@@ -30,7 +29,7 @@ public class Handler {
             socket.connect(sreverAddress, port);
             return socket.isConnected();
         } catch (IllegalArgumentException e){
-            Sender.send(new Message(messageType.ERROR,"Port out of range"));
+            Sender.send(new Message(MessageType.ERROR,"Port out of range"));
             return false;
         }
     }
@@ -47,12 +46,13 @@ public class Handler {
             socket.send(packet);
 
         } catch (Exception e) {
-            Sender.send(new Message(messageType.ERROR,"Error sending request"));
+            Sender.send(new Message(MessageType.ERROR,"Error sending request"));
         }
     }
 
     public Response dataReception() {
         try {
+            int BUFFER_SIZE = 1048576;
             byte[] buffer = new byte[BUFFER_SIZE];
             DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
             socket.setSoTimeout(Config.getRESPONSE_TIMEOUT_VALUE());
@@ -65,7 +65,6 @@ public class Handler {
     public Response validResponse(DatagramPacket packet) throws IOException, ClassNotFoundException {
         ByteArrayInputStream bis = new ByteArrayInputStream(packet.getData());
         ObjectInputStream ois = new ObjectInputStream(bis);
-        Response response = (Response) ois.readObject();
-        return response;
+        return (Response) ois.readObject();
     }
 }

@@ -11,5 +11,4 @@ public abstract class UpperCommand implements Serializable, Command {
     private CommandType commandType;
     private String name;
     private String info;
-
 }

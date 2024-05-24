@@ -43,13 +43,11 @@ public class Ticket implements Comparable<Ticket>, Serializable {
      */
     @Valid
     @NotNull(message = "Error! Coordinates can't be null!")
-    @JacksonXmlElementWrapper(localName = "coordinates", useWrapping = false)
     private Coordinates coordinates = null; //Поле не может быть null
     /**
      * Дата создания билета. Не может быть null, генерируется автоматически
      */
     @NotNull(message = "Error! Creation sate can't be null!")
-    @JsonSerialize(using = CustomSerializer.class)
     private ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     /**
      * Цена билета. Не может быть null, должно быть больше 0
@@ -75,18 +73,17 @@ public class Ticket implements Comparable<Ticket>, Serializable {
      * Некоторая информация о человеке.
      */
     @Valid
-    @JacksonXmlElementWrapper(localName = "person", useWrapping = false)
     private Person person = null; //Поле может быть null
-    @JsonCreator
-    public Ticket(@JacksonXmlProperty(localName = "id") String id,
-                  @JacksonXmlProperty(localName = "name") String name,
-                  @JacksonXmlProperty(localName = "coordinates") Coordinates coordinates,
-                  @JacksonXmlProperty(localName = "creationDate") String creationDate,
-                  @JacksonXmlProperty(localName = "price") String price,
-                  @JacksonXmlProperty(localName = "comment") String comment,
-                  @JacksonXmlProperty(localName = "refundable") String refundable,
-                  @JacksonXmlProperty(localName = "type") String type,
-                  @JacksonXmlProperty(localName = "person") Person person) {
+
+    public Ticket(String id,
+                  String name,
+                  Coordinates coordinates,
+                  String creationDate,
+                  String price,
+                  String comment,
+                  String refundable,
+                  String type,
+                  Person person) {
         try {
             this.id = Long.parseLong(id);
             this.name = name;

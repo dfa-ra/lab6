@@ -16,13 +16,13 @@ public class RemoveByIdCommand extends UpperCommand {
     private static final Logger logger = LogManager.getLogger(RemoveByIdCommand.class);
     CollectionManager cm = new CollectionManager();
 
-    public RemoveByIdCommand() {super(new CommandType(1, false), "remove_by_id", "remove an element from a collection by its id");}
+    public RemoveByIdCommand() {super(new CommandType(1, false, true), "remove_by_id", "remove an element from a collection by its id");}
 
     @Override
     public Response execute(Request request) {
         try{
             if (Long.parseLong(request.getArgumentsCommand()) > 0) {
-                String str = cm.removeById(Long.parseLong(request.getArgumentsCommand()));
+                String str = cm.removeById(Long.parseLong(request.getArgumentsCommand()), request.getLogin(), request.getPassword());
                 logger.info("Remove element with id " + request.getArgumentsCommand());
                 return new Response(str);
             }

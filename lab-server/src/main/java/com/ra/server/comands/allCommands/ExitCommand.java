@@ -16,11 +16,10 @@ public class ExitCommand extends UpperCommand {
 
     private static final Logger logger = LogManager.getLogger(ExitCommand.class);
 
-    public ExitCommand() {super(new CommandType(-1, false), "", "");}
+    public ExitCommand() {super(new CommandType(-1, false, false), "", "");}
     CollectionManager cm = new CollectionManager();
     @Override
     public Response execute(Request request) throws Exception {
-        cm.saveCollection();
         logger.info("Server closed");
         System.exit(0);
         return new Response("");

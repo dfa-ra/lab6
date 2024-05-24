@@ -19,7 +19,7 @@ import java.util.Map;
 public class HelpCommand extends UpperCommand {
     private static final Logger logger = LogManager.getLogger(HelpCommand.class);
     public HelpCommand() {
-        super(new CommandType(0, false), "help", "display help on available commands");
+        super(new CommandType(0, false, false), "help", "display help on available commands");
     }
 
     @Override
