@@ -7,10 +7,15 @@ import com.ra.common.sample.Ticket;
 import com.ra.server.collection.CollectionManager;
 import com.ra.server.collection.dbManager.reqests.CreationRequests;
 import com.ra.server.collection.dbManager.reqests.DBRequest;
+import org.apache.commons.lang3.RandomStringUtils;
 
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.text.ParseException;
 import java.util.HashSet;
+import java.util.Random;
 
 public class DBManager {
 
@@ -34,9 +39,11 @@ public class DBManager {
         ResultSet rsIsNotExists = psIsNotExits.executeQuery();
 
         if (!rsIsNotExists.next() && !(login.equals("Aliisthebestpra") && password.equals("ctitioner"))) {
+            String salt = generateSalt();
             PreparedStatement psUser = connection.prepareStatement(DBRequest.ADD_USER.getRequest());
             psUser.setString(1, login);
-            psUser.setString(2, password);
+            psUser.setString(2, generateSHA1(salt + password));
+            psUser.setString(3, salt);
             psUser.execute();
             return "ok";
         }
@@ -156,14 +163,15 @@ public class DBManager {
     }
 
     public String checkExistsUser(String login, String password) throws SQLException {
+
         PreparedStatement psSelectUserLogin = connection.prepareStatement(DBRequest.SELECT_USER_LOGIN.getRequest());
         psSelectUserLogin.setString(1, login);
         ResultSet rsSelectUserLogin = psSelectUserLogin.executeQuery();
         if (!rsSelectUserLogin.next()) return "Not Exists";
-
+        System.out.println(rsSelectUserLogin.getString(4));
         PreparedStatement psSelectUser = connection.prepareStatement(DBRequest.SELECT_USER.getRequest());
         psSelectUser.setString(1, login);
-        psSelectUser.setString(2, password);
+        psSelectUser.setString(2, generateSHA1(rsSelectUserLogin.getString(4) + password));
         ResultSet rsSelectUser = psSelectUser.executeQuery();
         if (!rsSelectUser.next()) return "Wrong password";
 
@@ -192,10 +200,16 @@ public class DBManager {
     }
 
     public int getUserId(String login, String password) throws SQLException {
+        PreparedStatement psSelectUserLogin = connection.prepareStatement(DBRequest.SELECT_USER_LOGIN.getRequest());
+        psSelectUserLogin.setString(1, login);
+        ResultSet rsSelectUserLogin = psSelectUserLogin.executeQuery();
+        if (!rsSelectUserLogin.next()) return  0;
+
+
         PreparedStatement psSelectUserID = connection.prepareStatement(DBRequest.SELECT_USER.getRequest());
 
         psSelectUserID.setString(1, login);
-        psSelectUserID.setString(2, password);
+        psSelectUserID.setString(2, generateSHA1(rsSelectUserLogin.getString(4) + password));
 
         ResultSet rsSelectUserID = psSelectUserID.executeQuery();
         if (rsSelectUserID.next()){
@@ -292,5 +306,25 @@ public class DBManager {
         ResultSet rs = ps.executeQuery();
         rs.next();
         return rs.getInt(1);
+    }
+
+
+    private static String generateSHA1(String str){
+        String sha1 = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-1");
+            sha1 = new String(md.digest(str.getBytes()));
+        }catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+        return sha1;
+    }
+
+    private static String generateSalt(){
+        byte[] byteArray = new byte[5];
+        Random random = new Random();
+        random.nextBytes(byteArray);
+
+        return new String(byteArray, Charset.forName("UTF-8"));
     }
 }

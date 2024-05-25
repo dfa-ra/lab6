@@ -9,7 +9,8 @@ public enum CreationRequests {
     CREATE_USER("CREATE TABLE IF NOT EXISTS Utilizer(" +
             "id BIGSERIAL PRIMARY KEY," +
             "login TEXT NOT NULL," +
-            "password TEXT NOT NULL" +
+            "password TEXT NOT NULL," +
+            "salt TEXT NOT NULL" +
             ")"),
 
     CREATE_LOCATION("CREATE TABLE IF NOT EXISTS Location(" +

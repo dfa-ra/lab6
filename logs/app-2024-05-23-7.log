@@ -1,0 +1,4 @@
+2024-05-23 23:05:54.581 [main] INFO  com.ra.server.Server - Starting server...
+2024-05-23 23:06:05.784 [main] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-05-23 23:06:11.105 [main] INFO  com.ra.server.comands.allCommands.AddCommand - Added ticket
+2024-05-23 23:06:31.917 [main] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown

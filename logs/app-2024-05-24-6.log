@@ -1,0 +1,6 @@
+2024-05-24 19:24:14.786 [main] INFO  com.ra.server.Server - Starting server...
+2024-05-24 19:25:04.528 [pool-3-thread-3] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-05-24 19:29:00.936 [pool-3-thread-1] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-05-24 19:31:30.754 [pool-3-thread-5] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-05-24 19:37:53.177 [pool-3-thread-4] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-05-24 19:38:39.841 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.HelpCommand - Done!

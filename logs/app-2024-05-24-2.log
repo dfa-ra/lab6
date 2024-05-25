@@ -1,0 +1,13 @@
+2024-05-24 18:56:57.777 [main] INFO  com.ra.server.Server - Starting server...
+2024-05-24 18:57:06.019 [pool-3-thread-2] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-05-24 18:57:08.319 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-05-24 18:57:32.972 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.AddCommand - Added ticket
+2024-05-24 18:57:38.706 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-05-24 18:58:24.942 [Thread-1] INFO  com.ra.server.comands.allCommands.ClearCommand - Collection cleared
+2024-05-24 18:58:32.051 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-05-24 18:58:36.845 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-05-24 18:59:15.970 [Thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-05-24 18:59:18.046 [Thread-1] INFO  com.ra.server.comands.allCommands.ClearCommand - Collection cleared
+2024-05-24 18:59:19.539 [Thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-05-24 19:01:03.530 [Thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-05-24 19:02:08.159 [pool-3-thread-5] INFO  com.ra.server.comands.Command - Information about commands was issued to the client

@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum DBRequest {
-    ADD_USER("INSERT INTO Utilizer(login, password) VALUES(?, ?)"),
+    ADD_USER("INSERT INTO Utilizer(login, password, salt) VALUES(?, ?, ?)"),
     ADD_TICKET("INSERT INTO Ticket(name, coordinates_id, creationDate," +
             " price, comment, refundable, type) VALUES(?, ?, ?, ?, ?, ?, ?)"),
     ADD_PERSON_TO_TICKET("UPDATE Ticket SET person_id = ? WHERE id = ?"),

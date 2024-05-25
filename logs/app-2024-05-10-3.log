@@ -1,0 +1,47 @@
+2024-05-10 21:12:30.537 [main] INFO  com.ra.server.Server - Starting server...
+2024-05-10 21:12:30.779 [main] DEBUG org.jboss.logging - Logging Provider: org.jboss.logging.Log4j2LoggerProvider
+2024-05-10 21:12:30.779 [main] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final
+2024-05-10 21:12:30.783 [main] DEBUG org.hibernate.validator.internal.xml.config.ValidationXmlParser - Trying to load META-INF/validation.xml for XML based Validator configuration.
+2024-05-10 21:12:30.784 [main] DEBUG org.hibernate.validator.internal.xml.config.ResourceLoaderHelper - Trying to load META-INF/validation.xml via TCCL
+2024-05-10 21:12:30.784 [main] DEBUG org.hibernate.validator.internal.xml.config.ResourceLoaderHelper - Trying to load META-INF/validation.xml via Hibernate Validator's class loader
+2024-05-10 21:12:30.784 [main] DEBUG org.hibernate.validator.internal.xml.config.ValidationXmlParser - No META-INF/validation.xml found. Using annotation based configuration only.
+2024-05-10 21:12:30.786 [main] DEBUG org.hibernate.validator.internal.engine.resolver.TraversableResolvers - Cannot find javax.persistence.Persistence on classpath. Assuming non JPA 2 environment. All properties will per default be traversable.
+2024-05-10 21:12:30.797 [main] DEBUG org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator - Loaded expression factory via original TCCL
+2024-05-10 21:12:30.841 [main] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryConfigurationHelper - HV000252: Using org.hibernate.validator.internal.engine.DefaultPropertyNodeNameProvider as property node name provider.
+2024-05-10 21:12:30.843 [main] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryConfigurationHelper - HV000234: Using org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator as ValidatorFactory-scoped message interpolator.
+2024-05-10 21:12:30.843 [main] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryConfigurationHelper - HV000234: Using org.hibernate.validator.internal.engine.resolver.TraverseAllTraversableResolver as ValidatorFactory-scoped traversable resolver.
+2024-05-10 21:12:30.843 [main] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryConfigurationHelper - HV000234: Using org.hibernate.validator.internal.util.ExecutableParameterNameProvider as ValidatorFactory-scoped parameter name provider.
+2024-05-10 21:12:30.843 [main] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryConfigurationHelper - HV000234: Using org.hibernate.validator.internal.engine.DefaultClockProvider as ValidatorFactory-scoped clock provider.
+2024-05-10 21:12:30.844 [main] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryConfigurationHelper - HV000234: Using org.hibernate.validator.internal.engine.scripting.DefaultScriptEvaluatorFactory as ValidatorFactory-scoped script evaluator factory.
+2024-05-10 21:12:42.136 [main] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-05-10 21:13:00.524 [main] INFO  com.ra.server.comands.allCommands.AddCommand - Added ticket
+2024-05-10 21:13:02.473 [main] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-05-10 21:48:42.358 [main] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-05-10 21:48:55.495 [main] INFO  com.ra.server.comands.allCommands.AddCommand - Added ticket
+2024-05-10 21:48:56.847 [main] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-05-10 21:49:04.867 [main] INFO  com.ra.server.comands.allCommands.ClearCommand - Collection cleared
+2024-05-10 21:49:13.143 [main] INFO  com.ra.server.comands.allCommands.SaveCommand - Saved collection
+2024-05-10 21:51:23.524 [main] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-05-10 21:51:31.859 [main] INFO  com.ra.server.comands.allCommands.AddCommand - Added ticket
+2024-05-10 21:51:33.244 [main] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-05-10 21:55:30.420 [main] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-05-10 21:55:31.793 [main] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-05-10 21:55:40.160 [main] INFO  com.ra.server.comands.allCommands.InfoCommand - Done
+2024-05-10 21:56:16.571 [main] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-05-10 21:56:37.804 [main] INFO  com.ra.server.comands.allCommands.InfoCommand - Done
+2024-05-10 21:56:56.887 [main] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-05-10 21:56:57.673 [main] INFO  com.ra.server.comands.allCommands.InfoCommand - Done
+2024-05-10 21:58:01.723 [main] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-05-10 21:58:03.035 [main] INFO  com.ra.server.comands.allCommands.HelpCommand - Done!
+2024-05-10 21:58:03.037 [main] INFO  com.ra.server.comands.allCommands.InfoCommand - Done
+2024-05-10 21:59:06.142 [main] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-05-10 21:59:07.101 [main] INFO  com.ra.server.comands.allCommands.HelpCommand - Done!
+2024-05-10 21:59:07.103 [main] INFO  com.ra.server.comands.allCommands.InfoCommand - Done
+2024-05-10 22:00:58.882 [main] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-05-10 22:01:00.237 [main] INFO  com.ra.server.comands.allCommands.HelpCommand - Done!
+2024-05-10 22:03:18.398 [main] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-05-10 22:03:34.784 [main] INFO  com.ra.server.comands.allCommands.AddCommand - Added ticket
+2024-05-10 22:03:49.703 [main] INFO  com.ra.server.comands.allCommands.HelpCommand - Done!
+2024-05-10 22:04:24.836 [main] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-05-10 22:04:52.180 [main] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-05-10 22:05:03.325 [main] INFO  com.ra.server.comands.Command - Information about commands was issued to the client

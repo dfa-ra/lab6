@@ -24,14 +24,14 @@ public class LogIn {
         form.formReady();
         answer = form.collectInfo(new BufferedReader(new InputStreamReader(System.in)));
         Request request = new Request("sign_in", "");
-        request.setUser(new User(answer.get(0), generateSHA1(answer.get(1))));
+        request.setUser(new User(answer.get(0), answer.get(1)));
         System.out.println(request.getLogin());
-        System.out.println(generateSHA1(answer.get(1)));
+        System.out.println(answer.get(1));
         handler.sendRequest(request);
         response = handler.dataReception();
         if (response.getAdditional().equals("ok")) {
             user.setLogin(answer.get(0));
-            user.setPassword(generateSHA1(answer.get(1)));
+            user.setPassword(answer.get(1));
             return true;
         }
         Sender.send(new Message(MessageType.WARNING, response.getAdditional(), "\n"));
@@ -45,29 +45,20 @@ public class LogIn {
         form.formReady();
         answer = form.collectInfo(new BufferedReader(new InputStreamReader(System.in)));
         Request request = new Request("sign_up", "");
-        request.setUser(new User(answer.get(0), generateSHA1(answer.get(1))));
+        request.setUser(new User(answer.get(0), answer.get(1)));
         System.out.println(request.getLogin());
-        System.out.println(generateSHA1(answer.get(1)));
+        System.out.println(answer.get(1));
         handler.sendRequest(request);
         response = handler.dataReception();
         if (response.getAdditional().equals("ok")) {
             Sender.send(new Message(MessageType.INFO, "User successfully registered!", "\n"));
             user.setLogin(answer.get(0));
-            user.setPassword(generateSHA1(answer.get(1)));
+            user.setPassword(answer.get(1));
             return true;
         }
         Sender.send(new Message(MessageType.WARNING, response.getAdditional(), "\n"));
         return false;
     }
 
-    private static String generateSHA1(String str){
-        String sha1 = null;
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-1");
-            sha1 = new String(md.digest(str.getBytes()));
-        }catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-        return sha1;
-    }
+
 }
