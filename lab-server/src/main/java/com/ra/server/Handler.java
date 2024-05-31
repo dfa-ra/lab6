@@ -26,9 +26,9 @@ public class Handler {
     private User sreverUser = new User("Aliisthebestpra", "ctitioner");
     Invoker invk = new Invoker();
 
-    private ExecutorService readThreadPool;
-    private ExecutorService processThreadPool;
-    private ExecutorService sendThreadPool;
+    private final ExecutorService readThreadPool;
+    private final ExecutorService processThreadPool;
+    private final ExecutorService sendThreadPool;
 
 
     public Handler() throws IOException {
@@ -110,6 +110,9 @@ public class Handler {
         @Override
         public void run() {
             try {
+                System.out.println("=======");
+                System.out.println(response.getAdditional());
+                System.out.println("=======");
                 channel.send(ByteBuffer.wrap(ToBytes.toBytes(response)), senderAddress);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -118,10 +121,13 @@ public class Handler {
     }
 
     public void dataReceptionAndSend() throws Exception {
+//
+//        readThreadPool.submit(new ReadThread());
 
-        readThreadPool.submit(new ReadThread());
+        new Thread(new ReadThread()).start();
 
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+
 
         new Thread(() -> {
             while (true)

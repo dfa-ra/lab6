@@ -125,16 +125,20 @@ public class InvokerClient {
     }
 
     public boolean checkPermission(List<String> tokens){
-        if (!validateRequest.getCommandType().containsKey(tokens.get(0)))
+        if (validateRequest.getCommandType().containsKey(tokens.get(0))) {
+            if (validateRequest.getCommandType().get(tokens.get(0)).isPermissionUpdate()) {
+                Request request = new Request("check_permission_update", tokens.get(1));
+                request.setUser(user);
+                connectHendler.sendRequest(request);
+                Response response = connectHendler.dataReception();
+                if (response.getAdditional().equals("ok")) {
+                    return true;
+                }
+                Sender.send(new Message(MessageType.WARNING, response.getAdditional(), "\n"));
+                return false;
+            }
             return true;
-        if (validateRequest.getCommandType().get(tokens.get(0)).isPermissionUpdate()){
-            Request request = new Request("check_permission_update", tokens.get(1));
-            request.setUser(user);
-            connectHendler.sendRequest(request);
-            Response response = connectHendler.dataReception();
-            if (response.getAdditional().equals("ok")) return false;
-            Sender.send(new Message(MessageType.WARNING, response.getAdditional(), "\n"));
         }
-        return true;
+        return false;
     }
 }

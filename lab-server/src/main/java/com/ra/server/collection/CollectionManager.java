@@ -89,7 +89,9 @@ public class CollectionManager{
         try {
             db.addTicket(ticket, login, password);
             ticket.setId(db.getTicketID());
-            notebook.add(ticket);
+            synchronized (this) {
+                notebook.add(ticket);
+            }
         }catch (SQLException e){
             e.getMessage();
         }
@@ -105,11 +107,15 @@ public class CollectionManager{
             String str = db.updateTicket(ticket, id);
             for (Ticket tmp : notebook) {
                 if (tmp.getId() == id) {
-                    notebook.remove(tmp);
-                    ZonedDateTime zonedatetime = tmp.getCreationDate();
-                    ticket.setId(id);
-                    ticket.setCreationDate(zonedatetime);
-                    notebook.add(ticket);
+                    synchronized (this) {
+                        notebook.remove(tmp);
+
+                        ZonedDateTime zonedatetime = tmp.getCreationDate();
+                        ticket.setId(id);
+                        ticket.setCreationDate(zonedatetime);
+
+                        notebook.add(ticket);
+                    }
                     return "Complete";
                 }
             }
@@ -129,7 +135,9 @@ public class CollectionManager{
             if (tmp.getId() == id){
                 try {
                     if (db.deleteByID(tmp.getId(), login, password)) {
-                        notebook.remove(tmp);
+                        synchronized (this) {
+                            notebook.remove(tmp);
+                        }
                         return "Complete!";
                     }
                 }catch (SQLException e){
@@ -151,7 +159,9 @@ public class CollectionManager{
                 e.getMessage();
             }
         }
-        notebook.clear();
+        synchronized (this) {
+            notebook.clear();
+        }
 
         System.out.println("Collection cleared");
     }
@@ -167,7 +177,9 @@ public class CollectionManager{
                 flag = true;
                 try {
                     if (db.deleteByID(tmp.getId(), login, password))
-                        notebook.remove(tmp);
+                        synchronized (this) {
+                            notebook.remove(tmp);
+                        }
                 }catch (SQLException e){
                     e.getMessage();
                 }
@@ -187,7 +199,9 @@ public class CollectionManager{
             if (tmp.getId() < id ){
                 flag = true;
                 if (db.deleteByID(tmp.getId(), login, password))
-                    notebook.remove(tmp);
+                    synchronized (this) {
+                        notebook.remove(tmp);
+                    }
             }
         }
         if (!flag) return "No IDs were found that matched the requirements. Try again!";

@@ -25,8 +25,6 @@ public class LogIn {
         answer = form.collectInfo(new BufferedReader(new InputStreamReader(System.in)));
         Request request = new Request("sign_in", "");
         request.setUser(new User(answer.get(0), answer.get(1)));
-        System.out.println(request.getLogin());
-        System.out.println(answer.get(1));
         handler.sendRequest(request);
         response = handler.dataReception();
         if (response.getAdditional().equals("ok")) {
@@ -46,8 +44,6 @@ public class LogIn {
         answer = form.collectInfo(new BufferedReader(new InputStreamReader(System.in)));
         Request request = new Request("sign_up", "");
         request.setUser(new User(answer.get(0), answer.get(1)));
-        System.out.println(request.getLogin());
-        System.out.println(answer.get(1));
         handler.sendRequest(request);
         response = handler.dataReception();
         if (response.getAdditional().equals("ok")) {

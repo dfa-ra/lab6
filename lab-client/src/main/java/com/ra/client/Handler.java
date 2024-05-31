@@ -39,6 +39,7 @@ public class Handler {
     }
 
     public void sendRequest(Request request){
+        System.out.println("send request");
         try {
             byte[] data = ToBytes.toBytes(request);
             DatagramPacket packet = new DatagramPacket(data, data.length);
