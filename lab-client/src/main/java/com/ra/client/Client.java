@@ -11,6 +11,7 @@ public final class Client {
     }
     public static void main(String[] args) throws Exception {
         Sender.send(new Message(MessageType.INFO,"Start client"));
+        System.out.println("8 чудо лаба");
         InvokerClient invokerClient = new InvokerClient();
         invokerClient.commandSelection();
     }
