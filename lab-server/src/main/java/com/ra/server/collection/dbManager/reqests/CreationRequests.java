@@ -5,7 +5,6 @@ import lombok.Getter;
 @Getter
 public enum CreationRequests {
     CREATE_TICKET_SEQUENCE("CREATE SEQUENCE IF NOT EXISTS id"),
-
     CREATE_USER("CREATE TABLE IF NOT EXISTS Utilizer(" +
             "id BIGSERIAL PRIMARY KEY," +
             "login TEXT NOT NULL," +

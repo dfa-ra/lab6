@@ -1,9 +1,5 @@
 package com.ra.common.sample;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.ra.common.enum_.TicketType;
 import lombok.*;
 
@@ -24,7 +20,7 @@ import java.time.ZonedDateTime;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-
+@ToString
 public class Ticket implements Comparable<Ticket>, Serializable {
     /**
      * Id каждого билета. Не может быть null, значение должно быть больше 0, должно быть уникальным, должно генерироваться автоматически
@@ -101,32 +97,43 @@ public class Ticket implements Comparable<Ticket>, Serializable {
         }
     }
 
-    @Override
-    public String toString() {
+    public String[] mytoString() {
         if (person == null){
-            return "{" +
-                    "\n\tid=" + id +
-                    "\n\tname='" + name + '\'' +
-                    "\n\tcoordinates=" + coordinates.toString() +
-                    "\n\tcreationDate=" + creationDate +
-                    "\n\tprice=" + price +
-                    "\n\tcomment='" + comment + '\'' +
-                    "\n\trefundable=" + refundable +
-                    "\n\ttype=" + type +
-                    "\n\tperson=null" +
-                    "\n}";
+            String[] res = {
+                    name,
+                    String.valueOf(coordinates.getX()),
+                    String.valueOf(coordinates.getY()),
+                    String.valueOf(creationDate),
+                    String.valueOf(price),
+                    comment,
+                    String.valueOf(refundable),
+                    String.valueOf(type),
+                    "-",
+                    "-",
+                    "-",
+                    "-",
+                    "-",
+                    "-",
+            };
+            return res;
         }else{
-            return "{" +
-                    "\n\tid=" + id +
-                    "\n\tname='" + name + '\'' +
-                    "\n\tcoordinates=" + coordinates.toString() +
-                    "\n\tcreationDate=" + creationDate +
-                    "\n\tprice=" + price +
-                    "\n\tcomment='" + comment + '\'' +
-                    "\n\trefundable=" + refundable +
-                    "\n\ttype=" + type +
-                    "\n\tperson=" + person.toString() +
-                    "\n}";
+            String[] res = {
+                    name,
+                    String.valueOf(coordinates.getX()),
+                    String.valueOf(coordinates.getY()),
+                    String.valueOf(creationDate),
+                    String.valueOf(price),
+                    comment,
+                    String.valueOf(refundable),
+                    String.valueOf(type),
+                    String.valueOf(person.getBirthday()),
+                    String.valueOf(person.getHairColor()),
+                    String.valueOf(person.getLocation().getX()),
+                    String.valueOf(person.getLocation().getY()),
+                    String.valueOf(person.getLocation().getZ()),
+                    person.getLocation().getName()
+            };
+            return res;
         }
 
     }

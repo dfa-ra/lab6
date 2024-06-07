@@ -23,17 +23,21 @@ public class RemoveGreaterCommand extends UpperCommand {
     public Response execute(Request request) {
         try{
             if (Long.parseLong(request.getArgumentsCommand()) > 0) {
-                String str = cm.removeGreater(Long.parseLong(request.getArgumentsCommand()), request.getLogin(), request.getPassword());
+                boolean str = cm.removeGreater(Long.parseLong(request.getArgumentsCommand()), request.getLogin(), request.getPassword());
                 logger.info("Remove element greater id = " + request.getArgumentsCommand());
-                return new Response(str);
+                if (str)
+                    return new Response(true);
+                else
+                    return new Response(false, "No IDs were found that matched the requirements. Try again!");
+
             }
             else {
                 logger.warn("id > 0");
-                return new Response("Warning! id > 0");
+                return new Response(false, "Warning! id > 0");
             }
         }catch (NumberFormatException e) {
             logger.error(e.getMessage());
-            return new Response("Argument type error. Try again!");
+            return new Response(false,"Argument type error. Try again!");
         }
     }
 }

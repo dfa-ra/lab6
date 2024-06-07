@@ -68,32 +68,42 @@ public class CollectionManager{
     /**
      * Метод выводящий в стандартный поток вывода все элементы коллекции в строковом представлении
      */
-    public Ticket[] show(){
+    public Ticket[] show(Long id){
         if (notebook.isEmpty()){
             return null;
         }
         else {
-            return notebook.stream().sorted(Comparator.comparing(Ticket::getName)).toList().toArray(new Ticket[0]);
+            if (id < 0L)
+                return notebook.stream().sorted(Comparator.comparing(Ticket::getName)).toList().toArray(new Ticket[0]);
+            else{
+                return notebook.stream()
+                        .filter(p -> Objects.equals(p.getId(), id))
+                        .findFirst().stream().toList().toArray(new Ticket[0]);
+            }
         }
     }
 
     /**
      * Метод добавляет новый элемент в коллекцию.
      */
-    public void add(Ticket ticket, String login, String password){
+    public Long add(Ticket ticket, String login, String password){
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
         ZoneId zoneId = ZoneId.systemDefault();
         ZonedDateTime zonedatetime = ZonedDateTime.of(date, time, zoneId);
         ticket.setCreationDate(zonedatetime);
         try {
+            System.out.println("near synhronizde");
             db.addTicket(ticket, login, password);
+            System.out.println("here ssunhron");
             ticket.setId(db.getTicketID());
             synchronized (this) {
                 notebook.add(ticket);
             }
+            return ticket.getId();
         }catch (SQLException e){
-            e.getMessage();
+            System.out.println(e.getMessage());
+            return -1L;
         }
     }
 
@@ -101,51 +111,45 @@ public class CollectionManager{
      * Метод, который обновляет элемент коллекции по-заданному id.
      * @param id id элемента который надо обновить.
      */
-    public String update(long id, Ticket ticket) throws SQLException {
+    public boolean update(long id, Ticket ticket) throws SQLException {
 
-        try {
-            String str = db.updateTicket(ticket, id);
-            for (Ticket tmp : notebook) {
-                if (tmp.getId() == id) {
-                    synchronized (this) {
-                        notebook.remove(tmp);
+        for (Ticket tmp : notebook) {
+            if (tmp.getId() == id) {
+                synchronized (this) {
+                    notebook.remove(tmp);
 
-                        ZonedDateTime zonedatetime = tmp.getCreationDate();
-                        ticket.setId(id);
-                        ticket.setCreationDate(zonedatetime);
+                    ZonedDateTime zonedatetime = tmp.getCreationDate();
+                    ticket.setId(id);
+                    ticket.setCreationDate(zonedatetime);
 
-                        notebook.add(ticket);
-                    }
-                    return "Complete";
+                    notebook.add(ticket);
                 }
+                return true;
             }
-            return str;
-        }catch (SQLException e){
-            e.getMessage();
-            return "Some Errors";
         }
+        return false;
     }
 
     /**
      * Метод удаления элемента коллекции по id.
      * @param id id элемента который надо удалить
      */
-    public String removeById(long id, String login, String password){
+    public boolean removeById(long id, String login, String password){
         for (Ticket tmp : notebook) {
             if (tmp.getId() == id){
-                try {
-                    if (db.deleteByID(tmp.getId(), login, password)) {
-                        synchronized (this) {
-                            notebook.remove(tmp);
-                        }
-                        return "Complete!";
+                try{
+                    db.deleteByID(tmp.getId(), login, password);
+                    System.out.println("000000000000000000000)))_)))))))))_)_)_)_)_");
+                    synchronized (this) {
+                        notebook.remove(tmp);
                     }
+                    return true;
                 }catch (SQLException e){
-                    e.getMessage();
+                    System.out.println(e.getMessage());
                 }
             }
         }
-        return "No such ID found. Try again!";
+        return false;
     }
 
     /**
@@ -170,7 +174,7 @@ public class CollectionManager{
      * Метод, который удаляет все элементы id больше заданного.
      * @param id заданный id.
      */
-    public String removeGreater(long id, String login, String password){
+    public boolean removeGreater(long id, String login, String password){
         boolean flag = false;
         for (Ticket tmp: notebook){
             if (tmp.getId() > id ){
@@ -185,15 +189,15 @@ public class CollectionManager{
                 }
             }
         }
-        if (!flag) return "No IDs were found that matched the requirements. Try again!";
-        else return "Complete!";
+        if (!flag) return false;
+        else return true;
     }
 
     /**
      * Метод, который удаляет все элементы id меньше заданного.
      * @param id заданный id.
      */
-    public String removeLower(long id, String login, String password) throws SQLException {
+    public boolean removeLower(long id, String login, String password) throws SQLException {
         boolean flag = false;
         for(Ticket tmp: notebook){
             if (tmp.getId() < id ){
@@ -204,8 +208,8 @@ public class CollectionManager{
                     }
             }
         }
-        if (!flag) return "No IDs were found that matched the requirements. Try again!";
-        else return "Complete!";
+        if (!flag) return false;
+        else return true;
     }
 
     /**

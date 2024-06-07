@@ -21,7 +21,7 @@ public class PrintFieldDescendingTypeCommand extends UpperCommand {
     public Response execute(Request request) throws Exception {
         String str = cm.printFieldDescendingType();
         logger.info("Done!");
-        return new Response(str);
+        return new Response(true, str);
 
     }
 }

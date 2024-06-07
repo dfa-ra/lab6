@@ -1,1 +1,149 @@
-2024-05-25 12:50:36.611 [main] INFO  com.ra.server.Server - Starting server...
+2024-06-07 00:06:20.566 [main] INFO  com.ra.server.Server - Starting server...
+2024-06-07 00:06:38.486 [pool-3-thread-2] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-06-07 00:06:38.679 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:06:40.393 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:06:42.527 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.RemoveByIdCommand - Remove element with id 10
+2024-06-07 00:06:45.115 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:06:50.256 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.AddCommand - Added ticket
+2024-06-07 00:06:50.270 [pool-3-thread-2] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:06:56.413 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.AddCommand - Added ticket
+2024-06-07 00:06:56.429 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:06:59.743 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.AddCommand - Added ticket
+2024-06-07 00:06:59.758 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:07:03.861 [pool-3-thread-2] INFO  com.ra.server.comands.allCommands.AddCommand - Added ticket
+2024-06-07 00:07:03.874 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:07:09.208 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.AddCommand - Added ticket
+2024-06-07 00:07:09.221 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:07:10.931 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:07:12.754 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.RemoveByIdCommand - Remove element with id 16
+2024-06-07 00:07:20.516 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:07:23.844 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:07:25.626 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.RemoveByIdCommand - Remove element with id 19
+2024-06-07 00:07:56.134 [pool-3-thread-1] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-06-07 00:07:56.224 [pool-3-thread-2] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:08:00.517 [pool-3-thread-2] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:09:54.083 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:10:20.020 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.AddCommand - Added ticket
+2024-06-07 00:10:20.047 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:10:29.941 [pool-3-thread-2] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:10:31.146 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:10:32.013 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:10:33.382 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:10:34.008 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:15:08.987 [pool-3-thread-2] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:15:09.921 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:15:10.979 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:15:12.023 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:15:12.902 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:15:14.345 [pool-3-thread-2] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:18:45.279 [pool-3-thread-5] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-06-07 00:18:45.485 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:18:48.754 [pool-3-thread-2] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:18:54.773 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:18:55.776 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:18:56.409 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:18:57.176 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:25:15.847 [pool-3-thread-2] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:25:17.407 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.RemoveByIdCommand - Remove element with id 17
+2024-06-07 00:25:18.939 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:25:25.994 [pool-3-thread-2] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:25:30.207 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:25:37.588 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:25:39.224 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:25:42.386 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.RemoveByIdCommand - Remove element with id 18
+2024-06-07 00:25:50.002 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:25:53.386 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:25:54.252 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:25:59.328 [pool-3-thread-2] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:26:52.549 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:26:53.711 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:26:56.719 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:27:02.955 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:27:03.538 [pool-3-thread-2] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:27:04.204 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:27:05.547 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:28:45.653 [pool-3-thread-5] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-06-07 00:30:09.789 [pool-3-thread-2] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-06-07 00:30:09.886 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:30:13.348 [pool-3-thread-2] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:30:19.012 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:36:53.503 [pool-3-thread-5] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-06-07 00:36:53.607 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:37:16.449 [pool-3-thread-1] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-06-07 00:37:16.540 [pool-3-thread-2] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:37:35.167 [pool-3-thread-2] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-06-07 00:37:35.243 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:37:39.988 [pool-3-thread-2] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:37:43.093 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:37:44.201 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:37:45.529 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:38:24.496 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:38:38.942 [pool-3-thread-3] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-06-07 00:38:39.048 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:38:43.109 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:42:49.988 [pool-3-thread-5] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-06-07 00:42:50.173 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:42:52.960 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:42:56.867 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:42:59.909 [pool-3-thread-2] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:43:16.102 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:43:21.540 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.AddCommand - Added ticket
+2024-06-07 00:43:21.554 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:43:29.271 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:53:52.654 [pool-3-thread-3] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-06-07 00:53:52.743 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:53:54.601 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:54:01.964 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.AddCommand - Added ticket
+2024-06-07 00:54:01.980 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:54:36.071 [pool-3-thread-2] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:54:53.610 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:56:17.338 [pool-3-thread-5] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-06-07 00:56:17.420 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:56:19.531 [pool-3-thread-2] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:56:28.294 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:56:33.694 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.AddCommand - Added ticket
+2024-06-07 00:56:33.708 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 00:56:44.350 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 02:05:13.433 [pool-3-thread-5] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-06-07 02:05:13.524 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 02:05:15.142 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 02:05:16.023 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 02:05:17.445 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 02:05:23.135 [pool-3-thread-2] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-06-07 02:05:23.141 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:33:42.885 [pool-3-thread-2] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-06-07 12:33:42.954 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:33:51.500 [pool-3-thread-1] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-06-07 12:33:51.513 [pool-3-thread-2] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:34:15.396 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:34:16.860 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:34:18.027 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:34:19.230 [pool-3-thread-2] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:34:22.644 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:34:33.319 [pool-3-thread-5] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-06-07 12:34:33.393 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:34:34.760 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:34:38.681 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:34:39.734 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:34:40.640 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:34:41.604 [pool-3-thread-2] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:35:47.928 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:35:48.862 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:35:50.846 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:35:51.499 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:35:52.587 [pool-3-thread-2] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:35:53.531 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:35:54.845 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:35:55.798 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:35:56.911 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:35:57.348 [pool-3-thread-2] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:35:58.326 [pool-3-thread-3] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:35:58.979 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:35:59.363 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:36:25.585 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:40:26.834 [pool-3-thread-3] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-06-07 12:40:26.927 [pool-3-thread-4] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:40:28.462 [pool-3-thread-1] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:40:30.789 [pool-3-thread-2] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown
+2024-06-07 12:44:40.016 [pool-3-thread-4] INFO  com.ra.server.comands.Command - Information about commands was issued to the client
+2024-06-07 12:44:40.170 [pool-3-thread-5] INFO  com.ra.server.comands.allCommands.ShowCommand - Collection shown

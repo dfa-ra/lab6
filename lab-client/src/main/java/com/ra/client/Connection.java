@@ -15,8 +15,10 @@ public class Connection {
     private Handler connectHendler;
 
     public Handler connection() throws IOException {
-        connectHendler = setHost();
-        setPort();
+//        connectHendler = setHost();
+//        setPort();
+        connectHendler = new Handler("localhost");
+        connectHendler.connect(1095);
         return connectHendler;
     }
 

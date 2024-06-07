@@ -3,6 +3,9 @@ package com.ra.server.comands.allCommands;
 import com.ra.common.commands.CommandType;
 import com.ra.common.communication.Request;
 import com.ra.common.communication.Response;
+import com.ra.common.message.Message;
+import com.ra.common.message.MessageType;
+import com.ra.common.message.Sender;
 import com.ra.server.collection.CollectionManager;
 import com.ra.server.comands.UpperCommand;
 import org.apache.logging.log4j.LogManager;
@@ -22,17 +25,18 @@ public class RemoveByIdCommand extends UpperCommand {
     public Response execute(Request request) {
         try{
             if (Long.parseLong(request.getArgumentsCommand()) > 0) {
-                String str = cm.removeById(Long.parseLong(request.getArgumentsCommand()), request.getLogin(), request.getPassword());
+                boolean str = cm.removeById(Long.parseLong(request.getArgumentsCommand()), request.getLogin(), request.getPassword());
+                Sender.send(new Message(MessageType.INFO, "Remove element with id " + request.getArgumentsCommand() + " " + str, "\n"));
                 logger.info("Remove element with id " + request.getArgumentsCommand());
                 return new Response(str);
             }
             else {
                 logger.warn("id > 0");
-                return new Response("Warning! id > 0");
+                return new Response(false, "Warning! id > 0");
             }
         }catch (NumberFormatException e) {
             logger.error(e.getMessage());
-            return new Response("Argument type error. Try again!");
+            return new Response(false,"Argument type error. Try again!");
         }
     }
 }

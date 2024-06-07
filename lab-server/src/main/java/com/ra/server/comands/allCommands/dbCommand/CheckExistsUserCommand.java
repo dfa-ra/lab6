@@ -15,6 +15,6 @@ public class CheckExistsUserCommand extends UpperCommand {
 
     @Override
     public Response execute(Request request) throws Exception {
-       return new Response(new DBManager(ConnectionBaseSQL.getInstance().getConnection()).checkExistsUser(request.getLogin(), request.getPassword()));
+       return new Response(true, new DBManager(ConnectionBaseSQL.getInstance().getConnection()).checkExistsUser(request.getLogin(), request.getPassword()));
     }
 }

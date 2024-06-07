@@ -13,10 +13,11 @@ import java.sql.SQLException;
 public class ConnectionBaseSQL {
     private static ConnectionBaseSQL connectionBaseSQL;
     private Connection connection;
-//
+
     private static final String URL = "jdbc:postgresql://localhost:5432/studs";
     private static final String USER = "ra";
     private static final String PASSWORD = "P@$SW0RD";
+
 //    private static final String URL = "jdbc:postgresql://pg:5432/studs";
 //    private static final String USER = "s408648";
 //    private static final String PASSWORD = "VlUqYMUDQqmkOSRs";

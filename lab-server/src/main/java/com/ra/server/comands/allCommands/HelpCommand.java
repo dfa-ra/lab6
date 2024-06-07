@@ -37,6 +37,6 @@ public class HelpCommand extends UpperCommand {
         }
         str += "===========================================";
         logger.info("Done!");
-        return new Response(str);
+        return new Response(true, str);
     }
 }

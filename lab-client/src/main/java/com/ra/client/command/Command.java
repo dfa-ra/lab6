@@ -4,5 +4,5 @@ import java.io.IOException;
 import java.text.ParseException;
 
 public interface Command {
-    void execute(String arg) throws IOException, ParseException;
+    void execute(String arg);
 }

@@ -31,9 +31,8 @@ public class ValidateRequest {
     public ValidateRequest(HashMap<String, CommandType> commandType) {
         this.commandType = commandType;
     }
-    public Request Validate(String commandName, String commandArg, BufferedReader reader) throws ParseException {
+    public Request Validate(String commandName, String commandArg, BufferedReader reader) {
         if (!commandType.containsKey(commandName)) return null;
-
         int len;
         if (commandArg.isEmpty())
             len = 0;
@@ -56,9 +55,14 @@ public class ValidateRequest {
             }
             Person person = null;
             try {
-                if (Objects.equals(answer.get(answer.size() - 1), "Y")) {
+                System.out.println(answer);
+                if (!(answer.get(7).equals("-") ||
+                        answer.get(8).equals("-") ||
+                        answer.get(9).equals("-") ||
+                        answer.get(10).equals("-") ||
+                        answer.get(11).equals("-") ||
+                        answer.get(12).equals("-")))
                     person = new Person(new SimpleDateFormat("dd.MM.yyyy").parse(answer.get(7)), Color.valueOf(answer.get(8)), new Location(answer.get(9), answer.get(10), answer.get(11), answer.get(12)));
-                }
                 return new Request(commandName, commandArg,
                         new Ticket(Long.valueOf(0), answer.get(0), new Coordinates(answer.get(1), answer.get(2)), null, Double.parseDouble(answer.get(3)), answer.get(4), Boolean.parseBoolean(answer.get(5)), TicketType.valueOf(answer.get(6)), person));
             }catch (Exception e){

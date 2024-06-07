@@ -22,6 +22,6 @@ public class ExitCommand extends UpperCommand {
     public Response execute(Request request) throws Exception {
         logger.info("Server closed");
         System.exit(0);
-        return new Response("");
+        return new Response(true, "");
     }
 }

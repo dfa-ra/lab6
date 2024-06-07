@@ -54,6 +54,7 @@ public class Invoker {
 
     public Response commandSelectionByStr(Request request, boolean clientCommand) throws Exception {
         if (commands.containsKey(request.getNameCommand())){
+            System.out.println(request.getNameCommand());
             Command command = commands.get(request.getNameCommand());
             Response response = command.execute(request);
             if (!clientCommand) Sender.send(new Message(MessageType.DEFAULT, response.toString() + "\n"));
@@ -61,7 +62,7 @@ public class Invoker {
         }
         else {
             Sender.send(new Message(MessageType.WARNING, "Command not found"));
-            return new Response("This command does not exist. Using the 'help' command you can see all available commands.");
+            return new Response(false, "This command does not exist. Using the 'help' command you can see all available commands.");
         }
     }
 

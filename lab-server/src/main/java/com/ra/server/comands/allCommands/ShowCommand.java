@@ -18,13 +18,13 @@ public class ShowCommand extends UpperCommand {
     CollectionManager cm = new CollectionManager();
 
     public ShowCommand() {
-        super(new CommandType(0, false, false), "show", "Print to standard output all the elements of the collection in string representation");
+        super(new CommandType(0,1,  false, false), "show", "Print to standard output all the elements of the collection in string representation");
     }
 
     @Override
     public Response execute(Request request) {
         logger.info("Collection shown");
-        return new Response(cm.show(), "Done!\n");
-    }
+        return new Response(true, cm.show(Long.valueOf(request.getArgumentsCommand())), "Done!\n");
 
+    }
 }

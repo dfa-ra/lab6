@@ -25,6 +25,6 @@ public class ClearCommand extends UpperCommand {
     public Response execute(Request request) {
         cm.clear(request.getLogin(), request.getPassword());
         logger.info("Collection cleared");
-        return new Response("Done!");
+        return new Response(true,"Done!");
     }
 }

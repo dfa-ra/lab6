@@ -24,6 +24,6 @@ public class InfoCommand extends UpperCommand {
     public Response execute(Request request) {
         String str = cm.info();
         logger.info("Done");
-        return new Response(str);
+        return new Response(true, str);
     }
 }

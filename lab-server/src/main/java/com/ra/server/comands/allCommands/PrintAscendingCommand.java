@@ -22,6 +22,6 @@ public class PrintAscendingCommand extends UpperCommand {
 
     @Override
     public Response execute(Request request) {
-        return new Response(cm.printAscending(), "");
+        return new Response(true, cm.printAscending(), "");
     }
 }

@@ -26,6 +26,6 @@ public class GroupCountingByTypeCommand extends UpperCommand {
     public Response execute(Request request) {
         String str = cm.groupCountingByType();
         logger.info("Done!");
-        return new Response(str);
+        return new Response(true,str);
     }
 }

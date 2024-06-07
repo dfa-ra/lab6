@@ -155,7 +155,7 @@ public class Handler {
         Request request = (Request) obj;
         ois.close();
         if (request.getNameCommand().equals("getAllCommand")) {
-            return new Response(invk.getAllCommand());
+            return new Response(true,invk.getAllCommand());
         } else{
             Sender.send(new Message(MessageType.INFO, "The server executes the command '" + request.getNameCommand() + "' sent from the client "));
             return invk.commandSelectionByStr(request, true);

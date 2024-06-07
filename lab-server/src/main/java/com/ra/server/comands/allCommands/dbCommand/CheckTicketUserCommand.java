@@ -14,6 +14,6 @@ public class CheckTicketUserCommand extends UpperCommand {
 
     @Override
     public Response execute(Request request) throws Exception {
-        return new Response(new DBManager(ConnectionBaseSQL.getInstance().getConnection()).checkTicketUser(Integer.parseInt(request.getArgumentsCommand()), request.getLogin(), request.getPassword()));
+        return new Response(true, new DBManager(ConnectionBaseSQL.getInstance().getConnection()).checkTicketUser(Integer.parseInt(request.getArgumentsCommand()), request.getLogin(), request.getPassword()));
     }
 }

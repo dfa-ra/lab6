@@ -282,22 +282,23 @@ public class DBManager {
 
     public boolean deleteByID(Long id, String login, String password) throws SQLException {
 
-        if (!checkTicketUser(Math.toIntExact(id), login, password).equals("ok")) return false;
-
         PreparedStatement psSelectTicketInfo = connection.prepareStatement(DBRequest.SELECT_TICKET_INFO.getRequest());
         psSelectTicketInfo.setInt(1, Math.toIntExact(id));
         ResultSet rsSelectTicketInfo = psSelectTicketInfo.executeQuery();
         rsSelectTicketInfo.next();
+        try{
+            PreparedStatement psSelectPersonInfo = connection.prepareStatement(DBRequest.SELECT_PERSON_INFO.getRequest());
+            psSelectPersonInfo.setInt(1, rsSelectTicketInfo.getInt(3));
+            ResultSet rsSelectPersonInfo = psSelectPersonInfo.executeQuery();
+            rsSelectPersonInfo.next();
 
-        PreparedStatement psSelectPersonInfo = connection.prepareStatement(DBRequest.SELECT_PERSON_INFO.getRequest());
-        psSelectPersonInfo.setInt(1, rsSelectTicketInfo.getInt(3));
-        ResultSet rsSelectPersonInfo = psSelectPersonInfo.executeQuery();
-        rsSelectPersonInfo.next();
-
-        deleteTicketById(Math.toIntExact(id));
-        deleteCoordinatesById(rsSelectTicketInfo.getInt(2));
-        deleteLocationById(rsSelectPersonInfo.getInt(2));
-        deletePersonById(rsSelectTicketInfo.getInt(3));
+            deleteTicketById(Math.toIntExact(id));
+            deleteCoordinatesById(rsSelectTicketInfo.getInt(2));
+            deleteLocationById(rsSelectPersonInfo.getInt(2));
+            deletePersonById(rsSelectTicketInfo.getInt(3));
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
         return true;
     }
 
