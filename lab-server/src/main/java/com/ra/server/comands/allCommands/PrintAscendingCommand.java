@@ -17,7 +17,7 @@ public class PrintAscendingCommand extends UpperCommand {
     CollectionManager cm = new CollectionManager();
 
     public PrintAscendingCommand() {
-        super(new CommandType(0, false, false),"print_ascending", "Print the collection elements in ascending order");
+        super(new CommandType(0, false, false),"print_ascending_id", "Print the collection elements in ascending order");
     }
 
     @Override

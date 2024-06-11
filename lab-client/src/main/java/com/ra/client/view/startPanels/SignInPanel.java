@@ -1,4 +1,4 @@
-package com.ra.client.view;
+package com.ra.client.view.startPanels;
 
 import com.ra.client.view.sours.RoundedButton;
 import lombok.Getter;
@@ -9,11 +9,14 @@ import java.io.File;
 import java.io.IOException;
 
 @Getter
-public class SignInView extends JFrame {
+public class SignInPanel extends JPanel {
     private final JTextField usernameField;
     private final JPasswordField passwordField;
     private final JButton loginButton;
-    public SignInView(){
+    private final JLabel passwordLabel;
+    private final JLabel usernameLabel;
+    public SignInPanel(CardLayout cardLayout){
+        super(cardLayout);
         Font font = null;
         try{
             font = Font.createFont(Font.TRUETYPE_FONT, new File("lab-client/src/main/resources/ZCOOLKuaiLe-Regular.ttf")).deriveFont(Font.BOLD,100f);
@@ -23,11 +26,7 @@ public class SignInView extends JFrame {
             e.printStackTrace();
         }
 
-        setTitle("sign in");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1980, 1080);
         setLayout(new GridBagLayout());
-        setLocationRelativeTo(null); // Центрируем окно на экране
 
         // Создаем панель для логина и пароля
         JPanel panel = new JPanel(new GridBagLayout());
@@ -44,21 +43,24 @@ public class SignInView extends JFrame {
         }
 
         // Создаем метку и поле ввода для логина
-        JLabel usernameLabel = new JLabel("Login",  SwingConstants.CENTER);
+        usernameLabel = new JLabel("Login",  SwingConstants.CENTER);
+        usernameLabel.setName("Login");
         usernameLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 30));
         usernameLabel.setPreferredSize(new Dimension(490, 49));
         usernameField = new JTextField();
         usernameField.setPreferredSize(new Dimension(590, 49));
 
         // Создаем метку и поле ввода для пароля
-        JLabel passwordLabel = new JLabel("Password", SwingConstants.CENTER);
+        passwordLabel = new JLabel("Password", SwingConstants.CENTER);
+        passwordLabel.setName("Password");
         passwordLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 30));
         passwordLabel.setPreferredSize(new Dimension(490, 49));
         passwordField = new JPasswordField();
         passwordField.setPreferredSize(new Dimension(590, 49));
 
         // Создаем кнопку входа
-        loginButton = new RoundedButton("sign in", 20);
+        loginButton = new RoundedButton("sign_in", 20);
+        loginButton.setName("sign_in");
         loginButton.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
         loginButton.setPreferredSize(new Dimension(156, 49));
 //        loginButton.addActionListener(new ActionListener() {
@@ -91,12 +93,7 @@ public class SignInView extends JFrame {
         gbc.gridy = 5;
         panel.add(loginButton, gbc);
 
+        add(panel);
         // Добавляем панель на основное окно и центрируем панель
-        getContentPane().add(panel, new GridBagConstraints());
-        setVisible(true);
-    }
-
-    public void goInvisible(){
-        setVisible(false);
     }
 }

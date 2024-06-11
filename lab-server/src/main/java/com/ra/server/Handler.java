@@ -23,7 +23,7 @@ public class Handler {
     private static final int THREAD_POOL_SIZE = 5;
 
     private final DatagramChannel channel;
-    private User sreverUser = new User("Aliisthebestpra", "ctitioner");
+    private User sreverUser = new User("Aliisthebestpra", "ctitioner", "", "", "");
     Invoker invk = new Invoker();
 
     private final ExecutorService readThreadPool;

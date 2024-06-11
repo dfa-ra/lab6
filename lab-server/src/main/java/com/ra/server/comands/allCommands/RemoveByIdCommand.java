@@ -25,6 +25,7 @@ public class RemoveByIdCommand extends UpperCommand {
     public Response execute(Request request) {
         try{
             if (Long.parseLong(request.getArgumentsCommand()) > 0) {
+
                 boolean str = cm.removeById(Long.parseLong(request.getArgumentsCommand()), request.getLogin(), request.getPassword());
                 Sender.send(new Message(MessageType.INFO, "Remove element with id " + request.getArgumentsCommand() + " " + str, "\n"));
                 logger.info("Remove element with id " + request.getArgumentsCommand());

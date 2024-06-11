@@ -25,6 +25,8 @@ public class RemoveLowerCommand extends UpperCommand {
     public Response execute(Request request) {
         try{
             if (Long.parseLong(request.getArgumentsCommand()) > 0) {
+
+                System.out.println("============================remove_lover");
                 boolean str = cm.removeLower(Long.parseLong(request.getArgumentsCommand()), request.getLogin(), request.getPassword());
                 logger.warn("Remove element lower id = " + request.getArgumentsCommand());
                 if (str)

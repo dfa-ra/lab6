@@ -1,5 +1,6 @@
 package com.ra.server.collection.dbManager;
 
+import com.ra.common.User;
 import com.ra.common.sample.Coordinates;
 import com.ra.common.sample.Location;
 import com.ra.common.sample.Person;
@@ -32,18 +33,21 @@ public class DBManager {
         }
     }
 
-    public String addUser(String login, String password) throws SQLException {
+    public String addUser(User user) throws SQLException {
 
         PreparedStatement psIsNotExits = connection.prepareStatement(DBRequest.SELECT_USER_LOGIN.getRequest());
-        psIsNotExits.setString(1, login);
+        psIsNotExits.setString(1, user.getLogin());
         ResultSet rsIsNotExists = psIsNotExits.executeQuery();
 
-        if (!rsIsNotExists.next() && !(login.equals("Aliisthebestpra") && password.equals("ctitioner"))) {
+        if (!rsIsNotExists.next() && !(user.getLogin().equals("Aliisthebestpra") && user.getPassword().equals("ctitioner"))) {
             String salt = generateSalt();
             PreparedStatement psUser = connection.prepareStatement(DBRequest.ADD_USER.getRequest());
-            psUser.setString(1, login);
-            psUser.setString(2, generateSHA1(salt + password));
+            psUser.setString(1, user.getLogin());
+            psUser.setString(2, generateSHA1(salt + user.getPassword()));
             psUser.setString(3, salt);
+            psUser.setString(4, user.getName());
+            psUser.setString(5, user.getSurname());
+            psUser.setString(6, user.getEMail());
             psUser.execute();
             return "ok";
         }
@@ -178,6 +182,27 @@ public class DBManager {
         return "ok";
     }
 
+    public String getUser(String login, String password) throws SQLException {
+
+        PreparedStatement psSelectUserLogin = connection.prepareStatement(DBRequest.SELECT_USER_LOGIN.getRequest());
+        psSelectUserLogin.setString(1, login);
+        ResultSet rsSelectUserLogin = psSelectUserLogin.executeQuery();
+        if (!rsSelectUserLogin.next()) return "Not Exists";
+        System.out.println(rsSelectUserLogin.getString(4));
+        PreparedStatement psSelectUser = connection.prepareStatement(DBRequest.SELECT_USER.getRequest());
+        psSelectUser.setString(1, login);
+        psSelectUser.setString(2, generateSHA1(rsSelectUserLogin.getString(4) + password));
+        ResultSet rsSelectUser = psSelectUser.executeQuery();
+        String str =  "";
+        if (!rsSelectUser.next()) str = "null null null";
+        else{
+            str += rsSelectUser.getString(2) + " " + rsSelectUser.getString(3) + " "  + rsSelectUser.getString(4);
+        }
+        return str;
+    }
+
+
+
     public String checkTicketUser(int id, String login, String password) throws SQLException {
 
         if (login.equals("Aliisthebestpra") && password.equals("ctitioner")) return "ok";
@@ -280,26 +305,31 @@ public class DBManager {
         psDeletePerson.execute();
     }
 
-    public boolean deleteByID(Long id, String login, String password) throws SQLException {
-
-        PreparedStatement psSelectTicketInfo = connection.prepareStatement(DBRequest.SELECT_TICKET_INFO.getRequest());
-        psSelectTicketInfo.setInt(1, Math.toIntExact(id));
-        ResultSet rsSelectTicketInfo = psSelectTicketInfo.executeQuery();
-        rsSelectTicketInfo.next();
+    public boolean deleteByID(Long id, String login, String password){
         try{
+            PreparedStatement psSelectTicketInfo = connection.prepareStatement(DBRequest.SELECT_TICKET_INFO.getRequest());
+            psSelectTicketInfo.setInt(1, Math.toIntExact(id));
+            ResultSet rsSelectTicketInfo = psSelectTicketInfo.executeQuery();
+            rsSelectTicketInfo.next();
+
             PreparedStatement psSelectPersonInfo = connection.prepareStatement(DBRequest.SELECT_PERSON_INFO.getRequest());
             psSelectPersonInfo.setInt(1, rsSelectTicketInfo.getInt(3));
             ResultSet rsSelectPersonInfo = psSelectPersonInfo.executeQuery();
-            rsSelectPersonInfo.next();
 
             deleteTicketById(Math.toIntExact(id));
             deleteCoordinatesById(rsSelectTicketInfo.getInt(2));
-            deleteLocationById(rsSelectPersonInfo.getInt(2));
-            deletePersonById(rsSelectTicketInfo.getInt(3));
+            if (rsSelectPersonInfo.next())
+                if (!rsSelectPersonInfo.getString(3).isEmpty()) {
+                    deletePersonById(rsSelectTicketInfo.getInt(3));
+                    deleteLocationById(rsSelectPersonInfo.getInt(2));
+                }
+
+            return true;
         }catch (SQLException e){
+            e.printStackTrace();
             System.out.println(e.getMessage());
+            return false;
         }
-        return true;
     }
 
     public long getTicketID() throws SQLException {

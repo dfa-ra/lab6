@@ -1,9 +1,10 @@
-package com.ra.client.view;
+package com.ra.client.view.mainPagePanels;
 
 import com.ra.client.view.sours.CustomComboBox;
 import com.ra.client.view.sours.CustomForm;
 import com.ra.client.view.sours.CustomTable;
 import com.ra.client.view.sours.RoundedButton;
+import com.ra.client.view.sours.CoordinateSystemPanel;
 import lombok.Getter;
 
 import javax.swing.*;
@@ -15,7 +16,7 @@ import java.io.IOException;
 import static java.awt.BorderLayout.CENTER;
 
 @Getter
-public class Home extends JFrame {
+public class HomePanel extends JPanel {
 
     private final JComboBox<String> removeComboBox;
     private final JComboBox<String> sortComboBox;
@@ -31,10 +32,13 @@ public class Home extends JFrame {
     private final RoundedButton userButton;
     private final RoundedButton settingsButton;
     private final RoundedButton homeButton;
+    private final JLabel log;
+    private final JTabbedPane tabbedPane;
+    private final JLabel titleLabel;
 
 
-
-    public Home(){
+    public HomePanel(CardLayout cardLayout){
+        super(cardLayout);
         Font font = null;
         try{
             font = Font.createFont(Font.TRUETYPE_FONT, new File("lab-client/src/main/resources/ZCOOLKuaiLe-Regular.ttf")).deriveFont(Font.BOLD,50f);
@@ -46,9 +50,6 @@ public class Home extends JFrame {
 
 
         // Создаем основное окно
-        setTitle("Home");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1980, 1080);
         setLayout(new BorderLayout());
 
         // Верхняя панель с логотипом и кнопками
@@ -63,10 +64,13 @@ public class Home extends JFrame {
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         userButton = new RoundedButton("USER", 20);
+        userButton.setName("USER");
         userButton.setPreferredSize(new Dimension(99, 29));
         settingsButton = new RoundedButton("Settings", 20);
+        settingsButton.setName("settings");
         settingsButton.setPreferredSize(new Dimension(99, 29));
         homeButton = new RoundedButton("Home", 20);
+        homeButton.setName("Home");
         homeButton.setPreferredSize(new Dimension(99, 29));
         buttonPanel.add(userButton);
         buttonPanel.add(settingsButton);
@@ -82,7 +86,8 @@ public class Home extends JFrame {
         infoPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 10));
 
         // Создаем заголовок
-        JLabel titleLabel = new JLabel("information", SwingConstants.CENTER);
+        titleLabel = new JLabel("information", SwingConstants.CENTER);
+        titleLabel.setName("information");
         titleLabel.setFont(new Font("Serif", Font.PLAIN, 24));
         titleLabel.setPreferredSize(new Dimension(200,100));
 
@@ -100,16 +105,20 @@ public class Home extends JFrame {
         buttonInfoPanel.setPreferredSize(new Dimension(200, 59));
         // Создаем кнопки
         addButton = new RoundedButton("Add", 20);
+        addButton.setName("Add");
         addButton.setPreferredSize(new Dimension(90, 29));
         addButton.setBackground(new Color(238,238,238));
         removeButton = new RoundedButton("Remove", 20);
+        removeButton.setName("Remove");
         removeButton.setPreferredSize(new Dimension(90, 29));
         removeButton.setBackground(new Color(238,238,238));
 
         updateButton = new RoundedButton("Update", 20);
+        updateButton.setName("Update");
         updateButton.setPreferredSize(new Dimension(90, 29));
         updateButton.setBackground(new Color(238,238,238));
         clearButton = new RoundedButton("Clear", 20);
+        clearButton.setName("Clear");
         clearButton.setPreferredSize(new Dimension(90, 29));
         clearButton.setBackground(new Color(238,238,238));
         // Добавляем кнопки на панель
@@ -128,7 +137,7 @@ public class Home extends JFrame {
 
         centerPanel.add(infoPanel, BorderLayout.EAST);
 
-        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane = new JTabbedPane();
         tabbedPane.setBorder(BorderFactory.createEmptyBorder(5, 20, 10, 20));
         UIManager.put("TabbedPane.contentBorderInsets", new Insets(0, 0, 0, 0));
         UIManager.put("TabbedPane.tabsOverlapBorder", true);
@@ -158,12 +167,15 @@ public class Home extends JFrame {
             }
         });
         // Центральная панель с тикетами и информацией
-        ticketsPanel = new JPanel();
+        ticketsPanel = new CoordinateSystemPanel();
+        ticketsPanel.setPreferredSize(new Dimension(1550, 850));
         ticketsPanel.setBorder(BorderFactory.createLineBorder(new Color(224,224,224)));
         ticketsPanel.setLayout(null); // Используем абсолютное позиционирование
         JPanel tabbedPanel = new JPanel(new BorderLayout());
+        JScrollPane scrollPane1 = new JScrollPane(ticketsPanel);
+        scrollPane1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-        tabbedPanel.add(ticketsPanel, CENTER);
+        tabbedPanel.add(scrollPane1, CENTER);
 
 
         JPanel tabbedPanel2 = new JPanel(new BorderLayout());
@@ -182,37 +194,59 @@ public class Home extends JFrame {
         add(centerPanel, CENTER);
 
         // Нижняя панель с кнопками
-        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        bottomPanel.setBorder(BorderFactory.createEmptyBorder(5, 20, 20, 20));
+        JPanel comboboxPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
-        String[] removeItems = {"remove greater", "remove lower"};
+        String[] removeItems = {"remove_item0", "remove_item1"};
         removeComboBox = new CustomComboBox<>(removeItems);
+        removeComboBox.setName("remove_item");
         removeComboBox.setBounds(50, 100, 200, 49);
         removeComboBox.setPreferredSize(new Dimension(150, 29));
 
-        String[] sortItems = {"sort by id", "sort by type"};
+        String[] sortItems = {"sort_item0", "sort_item1", "sort_item2"};
         sortComboBox = new CustomComboBox<>(sortItems);
+        sortComboBox.setName("sort_item");
         sortComboBox.setBounds(50, 100, 200, 49);
         sortComboBox.setPreferredSize(new Dimension(150, 29));
 
-        String[] groupingItems = {"grouping by type"};
+        String[] groupingItems = {"grouping_item0", "grouping_item1"};
+
         groupingComboBox = new CustomComboBox<>(groupingItems);
+        groupingComboBox.setName("grouping_item");
         groupingComboBox.setBounds(50, 100, 200, 49);
         groupingComboBox.setPreferredSize(new Dimension(150, 29));
 
+        JPanel logPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JLabel logLabel = new JLabel("Log:");
+        log = new JLabel(" ");
+        logPanel.add(logLabel);
+        logPanel.add(log);
 
-        bottomPanel.add(removeComboBox);
-        bottomPanel.add(sortComboBox);
-        bottomPanel.add(groupingComboBox);
+
+        comboboxPanel.add(removeComboBox);
+        comboboxPanel.add(sortComboBox);
+        comboboxPanel.add(groupingComboBox);
+
+        JPanel bottomPanel = new JPanel(new GridBagLayout());
+
+        bottomPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
+
+        gbc.gridx = 0; // Столбец 0
+        gbc.gridy = 0; // Строка 0
+        gbc.weightx = 1.0; // Расширяется по горизонтали
+        gbc.anchor = GridBagConstraints.WEST; // Привязка к левому краю
+        gbc.insets = new Insets(0, 10, 0, 0); // Отступы
+        bottomPanel.add(comboboxPanel, gbc);
+
+        // Настройки для правой кнопки
+        gbc.gridx = 1; // Столбец 1
+        gbc.gridy = 0; // Строка 0
+        gbc.weightx = 1.0; // Расширяется по горизонтали
+        gbc.anchor = GridBagConstraints.EAST; // Привязка к правому краю
+        gbc.insets = new Insets(0, 0, 0, 10); // Отступы
+        bottomPanel.add(logPanel, gbc);
+
         add(bottomPanel, BorderLayout.SOUTH);
-
-
         // Отображаем окно
-        setVisible(true);
-    }
-
-    public void goInvisible(){
-        setVisible(false);
     }
 
     private void addComponent(JPanel panel, Component comp, int x, int y, int width, int height, int anchor, int fill) {

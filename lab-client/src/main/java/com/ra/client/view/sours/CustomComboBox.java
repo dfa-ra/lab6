@@ -13,8 +13,6 @@ public class CustomComboBox<String> extends JComboBox<String> {
         super(items);
         setRenderer(new CenteredComboBoxRenderer());
         setUI(new RoundedComboBoxUI());
-
-
     }
     private static class CenteredComboBoxRenderer extends BasicComboBoxRenderer {
         @Override

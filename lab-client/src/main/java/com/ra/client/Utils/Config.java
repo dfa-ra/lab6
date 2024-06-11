@@ -7,7 +7,7 @@ public class Config {
     @Getter
     private static final int MAX_PORT_VALUE = Integer.MAX_VALUE;
     @Getter
-    private static final int RESPONSE_TIMEOUT_VALUE = 5000;
+    private static final int RESPONSE_TIMEOUT_VALUE = 15000;
 
     private Config(){}
 }

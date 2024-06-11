@@ -11,14 +11,14 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
+@Getter
 public class CustomForm extends JPanel{
-    private static LinkedHashMap<JTextField, String> textFieldDefaults = new LinkedHashMap<>();
-    private static LinkedHashMap<JCheckBox, Boolean> checkBoxDefaults = new LinkedHashMap<>();
-    private static LinkedHashMap<JComboBox<String>, String> comboBoxes = new LinkedHashMap<>();
-    private static LinkedHashMap<JLabel, String> labelDefaults = new LinkedHashMap<>();
+    private final LinkedHashMap<JTextField, String> textFieldDefaults = new LinkedHashMap<>();
+    private final LinkedHashMap<JCheckBox, Boolean> checkBoxDefaults = new LinkedHashMap<>();
+    private final LinkedHashMap<JComboBox<String>, String> comboBoxes = new LinkedHashMap<>();
+    private final LinkedHashMap<JLabel, String> labelDefaults = new LinkedHashMap<>();
 
     @Setter
-    @Getter
     private Long id;
 
     public CustomForm(){
@@ -30,8 +30,8 @@ public class CustomForm extends JPanel{
 
         // Adding components to the frame
         addLabelAndTextField(gbc, "Name:", 0);
-        addLabelAndTextField(gbc, "Coordinates X:", 1);
-        addLabelAndTextField(gbc, "Coordinates Y:", 2);
+        addLabelAndTextField(gbc, "Coordinates_X:", 1);
+        addLabelAndTextField(gbc, "Coordinates_Y:", 2);
         addLabelAndLabel(gbc, "Creation date:", "", 3);
         addLabelAndTextField(gbc, "Price:", 4);
         addLabelAndTextField(gbc, "Comment:", 5);
@@ -39,15 +39,16 @@ public class CustomForm extends JPanel{
 
         addLabelAndComboBox(gbc, "Type:", 7, new String[] {"", TicketType.USUAL.name(), TicketType.BUDGETARY.name(), TicketType.VIP.name(), TicketType.CHEAP.name()});
         addLabelAndTextField(gbc, "Birthday:", 8);
-        addLabelAndComboBox(gbc, "Hair Color:", 9, new String[] {"","-", Color.BLACK.name(), Color.BLUE.name(), Color.GREEN.name()});
-        addLabelAndTextField(gbc, "Location X:", 10);
-        addLabelAndTextField(gbc, "Location Y:", 11);
-        addLabelAndTextField(gbc, "Location Z:", 12);
-        addLabelAndTextField(gbc, "Location Name:", 13);
+        addLabelAndComboBox(gbc, "Hair_Color:", 9, new String[] {"","-", Color.BLACK.name(), Color.BLUE.name(), Color.GREEN.name()});
+        addLabelAndTextField(gbc, "Location_X:", 10);
+        addLabelAndTextField(gbc, "Location_Y:", 11);
+        addLabelAndTextField(gbc, "Location_Z:", 12);
+        addLabelAndTextField(gbc, "Location_Name:", 13);
 
     }
     private void addLabelAndLabel(GridBagConstraints gbc, String labelText, String labelText2,  int yPos) {
         JLabel label = new JLabel(labelText);
+        label.setName(labelText);
         JLabel label2 = new JLabel(labelText2);
         labelDefaults.put(label2, labelText2);
         gbc.gridx = 0;
@@ -60,6 +61,7 @@ public class CustomForm extends JPanel{
     }
     private void addLabelAndTextField(GridBagConstraints gbc, String labelText, int yPos) {
         JLabel label = new JLabel(labelText);
+        label.setName(labelText);
         JTextField textField = new JTextField(20);
         textFieldDefaults.put(textField, ""); // Сохранение значения по умолчанию
         gbc.gridx = 0;
@@ -73,6 +75,7 @@ public class CustomForm extends JPanel{
 
     private void addLabelAndCheckBox( GridBagConstraints gbc, String labelText, int yPos) {
         JLabel label = new JLabel(labelText);
+        label.setName(labelText);
         JCheckBox checkBox = new JCheckBox();
         checkBox.setBackground(new java.awt.Color(238,238,238));
         checkBox.setOpaque(true);
@@ -88,6 +91,7 @@ public class CustomForm extends JPanel{
     }
     private void addLabelAndComboBox(GridBagConstraints gbc, String labelText, int yPos, String[] options) {
         JLabel label = new JLabel(labelText);
+        label.setName(labelText);
         JComboBox<String> comboBox = new CustomComboBox<>(options);
         comboBoxes.put(comboBox, labelText);
         gbc.gridx = 0;
@@ -100,7 +104,7 @@ public class CustomForm extends JPanel{
     }
 
 
-    public static void cleaForm(){
+    public void cleaForm(){
         textFieldDefaults.replaceAll((t, v) -> "");
         checkBoxDefaults.replaceAll((c, v) -> false);
         comboBoxes.replaceAll((c, v) -> "");
@@ -110,25 +114,26 @@ public class CustomForm extends JPanel{
 
     public void setTextFieldAndCheckBoxDefaults(String[] ticket, Long id){
         this.id = id;
+        System.out.println(Arrays.toString(ticket));
         int i = 0;
         for (JTextField tf: textFieldDefaults.keySet()){
             if (i == 3 ||  i == 9)
                 i += 1;
             if (i == 6)
                 i += 2;
-            textFieldDefaults.put(tf, ticket[i]);
+            textFieldDefaults.put(tf, ticket[i+1]);
             i += 1;
         }
-        checkBoxDefaults.replaceAll((c, v) -> Boolean.valueOf(ticket[6]));
-        labelDefaults.replaceAll((c, v) -> ticket[3]);
+        checkBoxDefaults.replaceAll((c, v) -> Boolean.valueOf(ticket[6+1]));
+        labelDefaults.replaceAll((c, v) -> ticket[3+1]);
         int j = 7;
         for (JComboBox<String> cob: comboBoxes.keySet()){
-            comboBoxes.put(cob, ticket[j]);
+            comboBoxes.put(cob, ticket[j+1]);
             j += 2;
         }
         fillDefaults();
     }
-    private static void fillDefaults() {
+    private void fillDefaults() {
         for (HashMap.Entry<JTextField, String> entry : textFieldDefaults.entrySet()) {
             entry.getKey().setText(entry.getValue());
         }
@@ -142,7 +147,7 @@ public class CustomForm extends JPanel{
             entry.getKey().setText(entry.getValue());
         }
     }
-    public static List<String> collectFormData() {
+    public List<String> collectFormData() {
         List<String> formData = new ArrayList<>();
 
         // Получение данных из текстовых полей

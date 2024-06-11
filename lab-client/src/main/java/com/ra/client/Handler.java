@@ -53,11 +53,13 @@ public class Handler {
 
     public Response dataReception() {
         try {
+
             int BUFFER_SIZE = 1048576;
             byte[] buffer = new byte[BUFFER_SIZE];
             DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
             socket.setSoTimeout(Config.getRESPONSE_TIMEOUT_VALUE());
             socket.receive(packet);
+            System.out.println("take response");
             return validResponse(packet);
         } catch (Exception e) {
             return null;

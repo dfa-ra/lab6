@@ -100,6 +100,7 @@ public class Ticket implements Comparable<Ticket>, Serializable {
     public String[] mytoString() {
         if (person == null){
             String[] res = {
+                    String.valueOf(id),
                     name,
                     String.valueOf(coordinates.getX()),
                     String.valueOf(coordinates.getY()),
@@ -118,6 +119,7 @@ public class Ticket implements Comparable<Ticket>, Serializable {
             return res;
         }else{
             String[] res = {
+                    String.valueOf(id),
                     name,
                     String.valueOf(coordinates.getX()),
                     String.valueOf(coordinates.getY()),

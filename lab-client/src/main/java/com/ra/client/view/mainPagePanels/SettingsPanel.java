@@ -1,4 +1,4 @@
-package com.ra.client.view;
+package com.ra.client.view.mainPagePanels;
 
 import com.ra.client.view.sours.CustomComboBox;
 import com.ra.client.view.sours.RoundedButton;
@@ -9,26 +9,24 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 @Getter
-public class SettingsView extends JFrame {
+public class SettingsPanel extends JPanel {
     private final JLabel languageLabel;
     private final RoundedButton userButton;
     private final RoundedButton settingsButton;
     private final RoundedButton homeButton;
+    private final JComboBox<String> languageComboBox;
 
-    public SettingsView() {
+    public SettingsPanel(CardLayout cardLayout) {
+        super(cardLayout);
         Font font = null;
         try{
-            font = Font.createFont(Font.TRUETYPE_FONT, new File("lab-client/src/main/resources/ZCOOLKuaiLe-Regular.ttf")).deriveFont(Font.BOLD,100f);
+            font = Font.createFont(Font.TRUETYPE_FONT, new File("lab-client/src/main/resources/ZCOOLKuaiLe-Regular.ttf")).deriveFont(Font.BOLD,70f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(font);
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
 
-        setTitle("Settings");
-        setSize(1980, 1080);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
 
         // Основная панель
         JPanel mainPanel = new JPanel();
@@ -37,12 +35,16 @@ public class SettingsView extends JFrame {
         // Верхняя панель с кнопками
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        topPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
 
         userButton = new RoundedButton("USER", 20);
+        userButton.setName("USER");
         userButton.setPreferredSize(new Dimension(99, 29));
         settingsButton = new RoundedButton("Settings", 20);
+        settingsButton.setName("settings");
         settingsButton.setPreferredSize(new Dimension(99, 29));
         homeButton = new RoundedButton("Home", 20);
+        homeButton.setName("Home");
         homeButton.setPreferredSize(new Dimension(99, 29));
 
         topPanel.add(userButton);
@@ -59,11 +61,12 @@ public class SettingsView extends JFrame {
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         languageLabel = new JLabel("Language:");
+        languageLabel.setName("Language");
         languageLabel.setFont(new Font("Serif", Font.PLAIN, 24));
         languageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         String[] languages = { "English (Australia)", "Русский", "Български", "Português" };
-        JComboBox<String> languageComboBox = new CustomComboBox<>(languages);
+        languageComboBox = new CustomComboBox<>(languages);
         languageComboBox.setFont(new Font("Serif", Font.PLAIN, 24));
         languageComboBox.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -82,11 +85,5 @@ public class SettingsView extends JFrame {
 
         // Добавление основной панели в окно
         add(mainPanel);
-    }
-    public void goVisible(){
-        setVisible(true);
-    }
-    public void goInvisible(){
-        setVisible(false);
     }
 }

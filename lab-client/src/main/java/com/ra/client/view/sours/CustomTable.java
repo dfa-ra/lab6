@@ -13,24 +13,25 @@ public class CustomTable extends JTable {
     public final JTableHeader header;
     public CustomTable(){
 
-        String[] columnNames = {"Tickets"};
+        Object[][] data = {{}};
 
         // Данные таблицы
-        Object[][] data = {
-                {"name"},
-                {"coordinates x"},
-                {"coordinates y"},
-                {"creation date"},
-                {"price"},
-                {"comment"},
-                {"refundable"},
-                {"type"},
-                {"birthday"},
-                {"hair color"},
-                {"Location x"},
-                {"Location y"},
-                {"Location z"},
-                {"Location name"}
+        String [] columnNames = {
+                "Tickets",
+                "name",
+                "coordinates x",
+                "coordinates y",
+                "creation date",
+                "price",
+                "comment",
+                "refundable",
+                "type",
+                "birthday",
+                "hair color",
+                "Location x",
+                "Location y",
+                "Location z",
+                "Location name"
         };
 
         // Создание модели таблицы

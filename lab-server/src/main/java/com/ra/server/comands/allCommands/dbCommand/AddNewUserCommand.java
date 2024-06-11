@@ -17,7 +17,7 @@ public class AddNewUserCommand extends UpperCommand {
 
     @Override
     public Response execute(Request request) throws SQLException {
-        Response response = new Response(true, new DBManager(ConnectionBaseSQL.getInstance().getConnection()).addUser(request.getLogin(), request.getPassword()));
+        Response response = new Response(true, new DBManager(ConnectionBaseSQL.getInstance().getConnection()).addUser(request.getUser()));
         System.out.println(response.getAdditional());
         return response;
     }

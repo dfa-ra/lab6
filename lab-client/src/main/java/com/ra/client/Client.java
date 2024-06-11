@@ -1,15 +1,13 @@
 package com.ra.client;
 
-import com.ra.client.command.InvokerClient;
-import com.ra.client.controlers.HomeController;
 import com.ra.client.controlers.StartController;
-import com.ra.client.view.*;
-import com.ra.common.User;
+import com.ra.client.view.MainPageView;
+import com.ra.client.view.StartView;
 import com.ra.common.message.Message;
 import com.ra.common.message.Sender;
 import com.ra.common.message.MessageType;
 
-import javax.swing.*;
+import java.util.Locale;
 
 
 public final class Client {
@@ -18,8 +16,9 @@ public final class Client {
     }
     public static void main(String[] args) throws Exception {
         Sender.send(new Message(MessageType.INFO,"Start client"));
-        new UserView();
-//        new StartController(new StartView());
+//        new StartView();
+        new StartController(new StartView(), new Locale("en"));
+
 //        InvokerClient invokerClient = new InvokerClient();
 //        invokerClient.commandSelection();
     }

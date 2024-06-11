@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum DBRequest {
-    ADD_USER("INSERT INTO Utilizer(login, password, salt) VALUES(?, ?, ?)"),
+    ADD_USER("INSERT INTO Utilizer(login, password, salt, utilizerName, surname, email) VALUES(?, ?, ?, ?, ?, ?)"),
     ADD_TICKET("INSERT INTO Ticket(name, coordinates_id, creationDate," +
             " price, comment, refundable, type) VALUES(?, ?, ?, ?, ?, ?, ?)"),
     ADD_PERSON_TO_TICKET("UPDATE Ticket SET person_id = ? WHERE id = ?"),
@@ -32,7 +32,7 @@ public enum DBRequest {
     SELECT_SEQUENCE_TICKET_ID("SELECT last_value FROM id"),
     SELECT_TICKET_INFO("SELECT Utilizer_id, Coordinates_id, Person_id FROM Ticket WHERE id = ?"),
     SELECT_PERSON_INFO("SELECT id ,Location_id From Person WHERE id = ?"),
-    SELECT_USER("SELECT id FROM Utilizer WHERE (login = ? AND password = ?)"),
+    SELECT_USER("SELECT id, utilizerName, surname, email FROM Utilizer WHERE (login = ? AND password = ?)"),
     SELECT_USER_LOGIN("SELECT * FROM Utilizer WHERE (login = ?)"),
 
     SELECT_ALL_IN_ONE_TABLE("SELECT foo.id, foo.name, creationdate, price, comment, refundable, type, foo.x, foo.y, birthday, haircolor, Location.x, Location.y, Location.z, Location.name FROM \n" +

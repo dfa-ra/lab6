@@ -11,17 +11,15 @@ import org.apache.logging.log4j.Logger;
 /**
  * Класс вывода значения поля type всех элементов в порядке убывания
  */
-public class PrintFieldDescendingTypeCommand extends UpperCommand {
-    private static final Logger logger = LogManager.getLogger(PrintFieldDescendingTypeCommand.class);
+public class PrintAscendingTypeCommand extends UpperCommand {
+    private static final Logger logger = LogManager.getLogger(PrintAscendingTypeCommand.class);
     CollectionManager cm = new CollectionManager();
 
-    public PrintFieldDescendingTypeCommand() {super(new CommandType(0, false, false), "print_field_descending_type", "print the type field values of all elements in descending order");}
+    public PrintAscendingTypeCommand() {super(new CommandType(0, false, false), "print_ascending_type", "print the type field values of all elements in descending order");}
 
     @Override
     public Response execute(Request request) throws Exception {
-        String str = cm.printFieldDescendingType();
         logger.info("Done!");
-        return new Response(true, str);
-
+        return new Response(true, cm.printFieldDescendingType(), "Done\n");
     }
 }

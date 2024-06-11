@@ -10,6 +10,7 @@ import com.ra.common.communication.Response;
 import com.ra.common.message.Message;
 import com.ra.common.message.Sender;
 import com.ra.common.message.MessageType;
+import lombok.Getter;
 
 import java.io.*;
 import java.text.ParseException;
@@ -22,6 +23,7 @@ import java.util.*;
 public class InvokerClient {
     private final Scanner in = new Scanner(System.in);
     protected String[] tokens;
+    @Getter
     private Handler connectHendler;
 
     private ValidateRequest validateRequest;
@@ -39,7 +41,7 @@ public class InvokerClient {
 
 
 
-    public void getAllCommands() throws IOException {
+    public synchronized void getAllCommands() throws IOException {
         Request request = new Request("getAllCommand");
         connectHendler.sendRequest(request);
         Response response = connectHendler.dataReception();
@@ -71,7 +73,7 @@ public class InvokerClient {
 //        br.close();
 //    }
 
-    public Response creationReqest(User user, String str, BufferedReader reader) {
+    public synchronized Response creationReqest(User user, String str, BufferedReader reader) {
         List<String> tokens = Splitter.mySplit(str);
         if (clienCommands.containsKey(tokens.get(0))){
             clienCommands.get(tokens.get(0)).execute(tokens.get(1));
@@ -87,10 +89,8 @@ public class InvokerClient {
             connectHendler.sendRequest(request);
             Response response = connectHendler.dataReception();
             if (response != null) {
-                Sender.send(new Message(MessageType.DEFAULT, response.toString() + "\n"));
                 return response;
-            }
-            else {
+            }else {
                 Sender.send(new Message(MessageType.ERROR,"The server went out to smoke... Try to reconnect.", "\n\n"));
                 try {
                     connectHendler = new Connection().connection();

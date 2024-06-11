@@ -10,6 +10,7 @@ import com.ra.server.comands.allCommands.*;
 import com.ra.server.comands.allCommands.dbCommand.AddNewUserCommand;
 import com.ra.server.comands.allCommands.dbCommand.CheckExistsUserCommand;
 import com.ra.server.comands.allCommands.dbCommand.CheckTicketUserCommand;
+import com.ra.server.comands.allCommands.dbCommand.GetUserByLoginAndPasswordCommand;
 import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -42,14 +43,14 @@ public class Invoker {
         commands.put("clear", new ClearCommand());
         commands.put("remove_by_id", new RemoveByIdCommand());
         commands.put("update", new UpdateCommand());
-        commands.put("group_counting_by_type", new GroupCountingByTypeCommand());
         commands.put("remove_greater", new RemoveGreaterCommand());
         commands.put("remove_lower", new RemoveLowerCommand());
-        commands.put("print_ascending", new PrintAscendingCommand());
-        commands.put("print_field_descending_type", new PrintFieldDescendingTypeCommand());
+        commands.put("print_ascending_id", new PrintAscendingCommand());
+        commands.put("print_ascending_type", new PrintAscendingTypeCommand());
         commands.put("sign_up", new AddNewUserCommand());
         commands.put("sign_in", new CheckExistsUserCommand());
         commands.put("check_permission_update", new CheckTicketUserCommand());
+        commands.put("get_user_by_login_and_password", new GetUserByLoginAndPasswordCommand());
     }
 
     public Response commandSelectionByStr(Request request, boolean clientCommand) throws Exception {

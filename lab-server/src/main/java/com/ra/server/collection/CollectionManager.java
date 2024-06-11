@@ -137,16 +137,12 @@ public class CollectionManager{
     public boolean removeById(long id, String login, String password){
         for (Ticket tmp : notebook) {
             if (tmp.getId() == id){
-                try{
-                    db.deleteByID(tmp.getId(), login, password);
-                    System.out.println("000000000000000000000)))_)))))))))_)_)_)_)_");
-                    synchronized (this) {
-                        notebook.remove(tmp);
-                    }
-                    return true;
-                }catch (SQLException e){
-                    System.out.println(e.getMessage());
+                db.deleteByID(tmp.getId(), login, password);
+                System.out.println("000000000000000000000)))_)))))))))_)_)_)_)_");
+                synchronized (this) {
+                    notebook.remove(tmp);
                 }
+                return true;
             }
         }
         return false;
@@ -157,11 +153,7 @@ public class CollectionManager{
      */
     public void clear(String login, String password){
         for (Ticket tmp: notebook){
-            try {
-                db.deleteByID(tmp.getId(), login, password);
-                }catch (SQLException e){
-                e.getMessage();
-            }
+            db.deleteByID(tmp.getId(), login, password);
         }
         synchronized (this) {
             notebook.clear();
@@ -176,21 +168,25 @@ public class CollectionManager{
      */
     public boolean removeGreater(long id, String login, String password){
         boolean flag = false;
-        for (Ticket tmp: notebook){
-            if (tmp.getId() > id ){
-                flag = true;
-                try {
-                    if (db.deleteByID(tmp.getId(), login, password))
+
+        Iterator<Ticket> iterator = notebook.iterator();
+        while (iterator.hasNext()) {
+            Ticket tmp = iterator.next();
+            try {
+                if (tmp.getId() > id && db.checkTicketUser(Math.toIntExact(tmp.getId()), login, password).equals("ok")) {
+                    flag = true;
+                    if (db.deleteByID(tmp.getId(), login, password)) {
                         synchronized (this) {
-                            notebook.remove(tmp);
+                            iterator.remove(); // Удаляем элемент через итератор
                         }
-                }catch (SQLException e){
-                    e.getMessage();
+                    }
                 }
+            }catch (SQLException e){
+                System.out.println(e.getMessage());
             }
         }
-        if (!flag) return false;
-        else return true;
+
+        return flag;
     }
 
     /**
@@ -199,28 +195,27 @@ public class CollectionManager{
      */
     public boolean removeLower(long id, String login, String password) throws SQLException {
         boolean flag = false;
-        for(Ticket tmp: notebook){
-            if (tmp.getId() < id ){
-                flag = true;
-                if (db.deleteByID(tmp.getId(), login, password))
-                    synchronized (this) {
-                        notebook.remove(tmp);
+        Iterator<Ticket> iterator = notebook.iterator();
+        while (iterator.hasNext()) {
+            Ticket tmp = iterator.next();
+            try {
+                System.out.println(tmp.getId() + ":" + id);
+                System.out.println(db.checkTicketUser(Math.toIntExact(tmp.getId()), login, password).equals("ok"));
+                if (tmp.getId() < id && db.checkTicketUser(Math.toIntExact(tmp.getId()), login, password).equals("ok")) {
+                    System.out.println("------OK");
+                    flag = true;
+                    if (db.deleteByID(tmp.getId(), login, password)) {
+                        synchronized (this) {
+                            iterator.remove(); // Удаляем элемент через итератор
+                        }
                     }
+                }
+            }catch (SQLException e){
+                System.out.println(e.getMessage());
             }
         }
-        if (!flag) return false;
-        else return true;
-    }
 
-    /**
-     * Метод сгруппировывающий элементы коллекции по значению поля type и выводящий количество элементов в каждой группе.
-     */
-    public String groupCountingByType(){
-        String str = "";
-        for(TicketType type : TicketType.values()){
-            str += type.name() + ": " + notebook.stream().filter(ticket -> ticket.getType().name().equals(type.name())).count() + "\n";
-        }
-        return str;
+        return flag;
     }
 
     /**
@@ -233,12 +228,7 @@ public class CollectionManager{
     /**
      * Метод выводит значения поля type всех элементов в порядке убывания
      */
-    public String printFieldDescendingType(){
-        List<Ticket> list = notebook.stream().sorted().toList();
-        String str = "";
-        for (int i = list.size()-1; i >=0 ; i--) {
-            str += list.get(i).getType().toString() + "\n";
-        }
-        return str;
+    public Ticket[] printFieldDescendingType(){
+        return notebook.stream().sorted(Comparator.comparing(Ticket::getType)).toList().toArray(new Ticket[0]);
     }
 }

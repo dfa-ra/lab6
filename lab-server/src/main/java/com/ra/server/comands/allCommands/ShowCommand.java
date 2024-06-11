@@ -25,6 +25,5 @@ public class ShowCommand extends UpperCommand {
     public Response execute(Request request) {
         logger.info("Collection shown");
         return new Response(true, cm.show(Long.valueOf(request.getArgumentsCommand())), "Done!\n");
-
     }
 }

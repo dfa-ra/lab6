@@ -1,68 +1,45 @@
 package com.ra.client.view;
 
-import com.ra.client.controlers.SignInController;
 import com.ra.client.view.sours.RoundedButton;
+import com.ra.client.view.startPanels.SignInPanel;
+import com.ra.client.view.startPanels.SignUpPanel;
+import com.ra.client.view.startPanels.StartPanel;
 import lombok.Getter;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 @Getter
 public class StartView extends JFrame {
+    private final JPanel     mainPanel;
+    private final CardLayout cardLayout;
+    private final SignUpPanel signUpPanel;
+    private final SignInPanel signInPanel;
+    private final StartPanel startPanel;
 
-    private final JButton signInButton;
-    private final JButton signUpButton;
+
 
     public StartView(){
         setTitle("Ticket");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1980, 1080);
 
-        Font font = null;
-        try{
-            font = Font.createFont(Font.TRUETYPE_FONT, new File("lab-client/src/main/resources/ZCOOLKuaiLe-Regular.ttf")).deriveFont(Font.BOLD,200f);
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(font);
-        } catch (IOException | FontFormatException e) {
-            e.printStackTrace();
-        }
-
         // Создаем метку
+        cardLayout = new CardLayout();
+        mainPanel = new JPanel(cardLayout);
 
-        JPanel centerPanel = new JPanel();
-        centerPanel.setLayout(new GridLayout());
-        JLabel label = new JLabel("TickeT", SwingConstants.CENTER);
-        if (font != null) {
-            System.out.println("here");
-            font.deriveFont(200f);
-            label.setFont(font);
-        }
-        centerPanel.add(label);
+        signInPanel = new SignInPanel(cardLayout);
+        signUpPanel = new SignUpPanel(cardLayout);
+        startPanel = new StartPanel(cardLayout);
 
-        JPanel topRightPanel = new JPanel();
-        topRightPanel.setLayout(new FlowLayout());
-        signInButton = new RoundedButton("sign in", 20);
-        signInButton.setPreferredSize(new Dimension(100, 35));
-        signUpButton = new RoundedButton("sign up", 20);
-        signUpButton.setPreferredSize(new Dimension(100, 35));
-
-        topRightPanel.add(signInButton);
-        topRightPanel.add(signUpButton);
-
-        JPanel topPanel = new JPanel(new BorderLayout());
-
-        topPanel.add(topRightPanel, BorderLayout.EAST);
-        // Добавляем метку в окно
-        add(centerPanel, BorderLayout.CENTER);
-        add(topPanel, BorderLayout.NORTH);
+        mainPanel.add(startPanel, "start");
+        mainPanel.add(signInPanel, "signIn");
+        mainPanel.add(signUpPanel, "signUp");
+        System.out.println(Arrays.toString(mainPanel.getComponents()));
+        add(mainPanel);
         setVisible(true);
     }
-
-    public void goInvisible(){
-        setVisible(false);
-    }
-
 }
